@@ -29,8 +29,8 @@
 //**************************************************************************************//
 
 #include <iostream>
-#include <cstdlib>													// contiene la funcion system("pause")
-#include <locale.h>													// Libreria que contiene la funcion setlocale
+#include <cstdlib>													//Libreria que habilita mas funciones especiales
+#include <locale.h>													//Libreria que contiene la funcion setlocale
 #include <Windows.h>												//Libreria para medidas de pantalla
 #include <allegro5/allegro.h>										//Libreria base de Allegro
 #include <allegro5/allegro_image.h>									//Libreria para implementar Imagenes
@@ -54,17 +54,21 @@ ALLEGRO_BITMAP* menu_salir;											//Variable que contiene imagen Menu Salir
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
 ALLEGRO_BITMAP* comida;												//Variable que contiene Textura Comida
-ALLEGRO_BITMAP* fondo;								
+ALLEGRO_BITMAP* fondo;												//Fondo del juego
+ALLEGRO_BITMAP* steve;												//Personaje
+ALLEGRO_BITMAP* stevebmp;											//Imagen del personaje
+ALLEGRO_BITMAP* muertesteve;										//Imagen muerte
 
 int dir = 0;														//Direccion del Personaje
 int px = 30 * 14, py = 30 * 17;										//Posicion del Personaje
+int antpx, antpy;													//Posicion anteriro del Personaje
 int jugar();														//Inicia Funcion Jugar
 
 //MAPA DEL JUEGO
 char mapa[MAXFIL][MAXCOL] = {
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "X  o |o o o XXXXXX o o o| o  X",
-  "X XXX XX XX  o  o  XX XX XXX X",
+  "X XXX XX XX| o  o |XX XX XXX X",
   "XoXXX XX XX XXXXXX XX XX XXXoX",
   "X      o|o   o  o   o|o      X",
   "XoXXXoXX XXX XXXX XXX XXoXXXoX",
@@ -83,31 +87,6 @@ char mapa[MAXFIL][MAXCOL] = {
   "X  o |o o  XXXXXXXXX o o| o  X",
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
-
-/*
-char mapa[MAXFIL][MAXCOL] = {
-	"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-	"x           xxxxxx           x",
-	"x xxx xxxxx   xx   xxxxx xxx x",
-	"x xxx     xxxxxxxxxxx        x",
-	"x     xx     xxxx     xx     x",
-	"x xxx xx      xx      xx xxx x",
-	"x     xx xxxx    xxxx xx     x",
-	"x xxx xx xxxx    xxxx xx xxx x",
-	"x xxx xx xxxx    xxxx xx xxx x",
-	"      xx     xxxx     xx      ",
-	"x xxx xx x xxxxxxxx x xx xxx x",
-	"x xxx xx x xxxxxxxx x xx xxx x",
-	"x xxx xx x xx    xx x xx xxx x",
-	"x     xx      xx      xx     x",
-	"x xxx xxxxxx xxxx xxxxxx xxx x",
-	"x xxx xx     xxxx     xx xxx x",
-	"x xxx xx xxxxxxxxxxxx xx xxx x",
-	"x xxx                    xxx x",
-	"x           xxxxxx           x",
-	"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-};
-*/
 
 //PROGAMA INICIAL
 int main()
@@ -140,6 +119,9 @@ int main()
 	roca = al_load_bitmap("img/roca.png");
 	comida = al_load_bitmap("img/comida.png");
 	fondo = al_load_bitmap("img/fondo.png");
+	steve = al_create_bitmap(33, 33);
+	stevebmp = al_load_bitmap("img/steve0.png");
+	muertesteve = al_load_bitmap("img/muerte2.png");
 
 	//CREAMOS EL TIPO DE LETRA CON TAMAÑO
 	ALLEGRO_FONT* font = al_load_font("fonts/Minecraft.ttf", 70, 0);
@@ -170,16 +152,16 @@ int main()
 	//ACTIVAMOS MUSICA DE MENU
 	al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
-	//CICLO QUE TENDRA EL PROGRAMA ACTIVO
-	while (!GetAsyncKeyState(VK_ESCAPE))		//Para cerrar el Programa se espera la señal de tecla "ESC"
+	//CICLO QUE TENDRA EL PROGRAMA ACTIVO "MENU"
+	while (!GetAsyncKeyState(VK_ESCAPE))							//Para cerrar el Programa se espera la señal de tecla "ESC"
 	{
 
 		ALLEGRO_EVENT Evento;										//Variable que llevara el Evento a registrar
 		al_wait_for_event(event_queue, &Evento);
 
-		al_clear_to_color(al_map_rgb(0, 0, 0));						//Limpiamos todo color que tengamos
+		al_clear_to_color(al_map_rgb(0, 0, 0));						//Limpiamos todo color que tengamos para liberar memoria
 
-		//VALIDAMOS CLICK PARA ACTIVAR MENU DEPENDIENDO UBICACION
+		//VALIDAMOS CLICK PARA ACTIVAR MENU DEPENDIENDO UBICACION DEL PUNTERO
 		if (botones[0] == 0) {
 			al_draw_bitmap(menu_null, 0, 0, 0);						//Pintamos lo que contenga la variable "menu_null"
 
@@ -262,7 +244,21 @@ void mapeado() {
 				al_draw_bitmap(comida, col * 30, row * 30, 0);
 				if ((py / 30 == row) && (px / 30 == col))
 				{
-					//ACTIVAMOS MUSICA DE MENU
+					//ACTIVAMOS MUSICA DE COMIDA
+					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+
+					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
+					mapa[row][col] = 'N';
+
+				}
+			}
+			else if (mapa[row][col] == 'N')
+			{
+				//PINTAMOS COMIDA
+				al_draw_bitmap(comida, col * 30, row * 30, 0);
+				if ((py / 30 == row) && (px / 30 == col))
+				{
+					//ACTIVAMOS MUSICA DE COMIDA
 					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
@@ -277,8 +273,123 @@ void mapeado() {
 	al_destroy_sample(sonidocomida);
 }
 
-//FIN DE JUEGO
+//DIBUJADO PERSONAJE
+void dibujar_steve()
+{
+	al_draw_bitmap(stevebmp, px, py, 0);
+}
 
+//ZOMBIE
+class zombie
+{
+	ALLEGRO_BITMAP* zombiebmp;
+	ALLEGRO_BITMAP* zombie1;
+	int fdir= rand() % 4;
+	int _x, _y;
+
+public:
+	zombie(int x, int y); //Constructor
+	void dibujarzombie() const;
+	void moverzombie();
+	void choquezombie();
+};
+
+zombie::zombie(int x, int y)
+{
+	_x = x;
+	_y = y;
+	fdir = rand() % 4;
+
+	zombie1 = al_create_bitmap(30, 30);
+	zombiebmp = al_load_bitmap("img/zombie.png");
+}
+
+void zombie::dibujarzombie() const
+{
+	al_draw_bitmap(zombiebmp, _x, _y, 0);
+}
+
+void zombie::choquezombie()
+{
+	ALLEGRO_SAMPLE* muerte = al_load_sample("sound/muerte.wav");
+	al_reserve_samples(3);
+
+	if (((py == _y) && (px == _x)) || ((_y == antpy) && (_x == antpx)))
+	{
+		//ACTIVAMOS SONIDO DE MUERTE
+		al_play_sample(muerte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		for (int i = 0; i <= 1; i++)
+		{
+			mapeado();
+		}
+		
+		px = 30 * 14;
+		py = 30 * 17;
+		dir = 4;
+	}
+	al_destroy_sample(muerte);
+	al_flip_display();
+}
+
+void zombie::moverzombie()
+{
+	dibujarzombie();
+	choquezombie();
+
+	fdir = rand() % 4;
+	
+	if (mapa[_y / 30][_x / 30] == '|')
+	{
+		fdir = rand() % 4;
+	}
+	/*
+	if (fdir == 0)
+	{
+		if (mapa[_y / 30][(_x - 30) / 30] != 'X') _x -= 30;
+		else fdir = rand() % 4;
+	}
+	else if (fdir == 1)
+	{
+		if (mapa[_y / 30][(_x + 30) / 30] != 'X') _x += 30;
+		else fdir = rand() % 4;
+	}
+	else if (fdir == 2)
+	{
+		if (mapa[(_y - 30) / 30][_x / 30] != 'X') _y -= 30;
+		else fdir = rand() % 4;
+	}
+	else if (fdir == 3)
+	{
+		if (mapa[(_y + 30) / 30][_x / 30] != 'X') _y += 30;
+		else fdir = rand() % 4;
+	}
+	
+	switch (fdir)
+	{
+	case 0:
+		if (mapa[_y / 30][(_x - 30) / 30] != 'X') _x -= 30;
+		else fdir = rand() % 4;
+		break;
+	case 1:
+		if (mapa[_y / 30][(_x + 30) / 30] != 'X') _x += 30;
+		else fdir = rand() % 4;
+		break;
+	case 2:
+		if (mapa[(_y - 30) / 30][_x / 30] != 'X') _y -= 30;
+		else fdir = rand() % 4;
+		break;
+	case 3:
+		if (mapa[(_y + 30) / 30][_x / 30] != 'X') _y += 30;
+		else fdir = rand() % 4;
+		break;
+	}
+	*/
+	//Atajo
+	if (_x <= -30)_x = 870;
+	else if (_x >= 870)_x = -30;
+}
+
+//FIN DE JUEGO
 bool game_over()
 {
 	int row, col;
@@ -299,54 +410,73 @@ int jugar()
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
 	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
 	al_reserve_samples(1);
+	//CREAMOS VARIABLES DE SONIDO COMIDA
+	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
+	al_reserve_samples(2);
 	
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over()) )					//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over()) )		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
+		//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
+		ALLEGRO_EVENT events;
+		al_wait_for_event(event_queue, &events);
 
-		ALLEGRO_EVENT Evento;
-		al_wait_for_event(event_queue, &Evento);
+		//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
+		antpx = px;
+		antpy = py;
 
-		/*if (dir == 0)
+		//ENEMIGOS
+		//Zombie
+		zombie A(30 * 1, 30 * 3);									//Creamos enemigo
+
+		//SONIDO DE CAMINAR
+		if (dir != 4)
 		{
-
-		}
-		if (dir == 1)
-		{
-
-		}
-		if (dir == 2)
-		{
-
-		}
-		if (dir == 3)
-		{
-
+			//ACTIVAMOS SONIDO DE CAMINAR
+			al_play_sample(caminar, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 		}
 
-		if(Evento.type == ALLEGRO_EVENT_KEY_DOWN)
+		//TECLAS DE MOVIMIENTO
+		if(events.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
-			 if(ALLEGRO_KEY_RIGHT) dir = 1;
-			else if(ALLEGRO_KEY_LEFT) dir = 0;
-			else if(ALLEGRO_KEY_UP) dir = 2;
-			else if(ALLEGRO_KEY_DOWN) dir = 3;
+            switch(events.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_DOWN:
+				if (mapa[(py + 30) / 30][px / 30] != 'X') py += 30;
+				else dir = 4;
+				break;
+			case ALLEGRO_KEY_UP:
+				if (mapa[(py - 30) / 30][px / 30] != 'X') py -= 30;
+				else dir = 4;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				if (mapa[py / 30][(px + 30) / 30] != 'X') px += 30;
+				else dir = 4;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				if (mapa[py / 30][(px - 30) / 30] != 'X') px -= 30;
+				else dir = 4;
+				break;
+			}
 		}
 
+		//ATAJOS DEL MAPA
 		if (px <= -30)px = 870;
 		else if (px >= 870)px = -30;
-		*/
+		
 		al_clear_to_color(al_map_rgb(0, 0, 0));
-		mapeado();														//Activamos la funcion que dibuja el Mapa
-		//dibujar_steve();
 
+		mapeado();													//Activamos la funcion que dibuja el Mapa
+		dibujar_steve();											//Activamos la funciones que dibuja al Personaje
+		A.moverzombie();											//Activamos la creacion de un enemigo y movimiento del mismo
 		al_flip_display();
-
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
 	al_destroy_sample(ambiente);
+	al_destroy_sample(caminar);
 	return 1;
 }
