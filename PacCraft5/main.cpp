@@ -52,9 +52,19 @@ ALLEGRO_BITMAP* menu_null;											//Variable que contiene imagen Menu Inicial
 ALLEGRO_BITMAP* menu_play;											//Variable que contiene imagen Menu Play
 ALLEGRO_BITMAP* menu_salir;											//Variable que contiene imagen Menu Salir
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
+
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
-ALLEGRO_BITMAP* comida;												//Variable que contiene Textura Comida
-ALLEGRO_BITMAP* fondo;												//Fondo del juego
+ALLEGRO_BITMAP* netherrack;											//Variable que contiene Textura Netherrack
+ALLEGRO_BITMAP* endstone;											//Variable que contiene Textura End Stone
+
+ALLEGRO_BITMAP* diamante;											//Variable que contiene Textura Diamante
+ALLEGRO_BITMAP* netherite;											//Variable que contiene Textura Netherite
+ALLEGRO_BITMAP* enderperl;											//Variable que contiene Textura Enderperl
+
+ALLEGRO_BITMAP* cueva;												//Fondo del Cueva
+ALLEGRO_BITMAP* nether;												//Fondo del Nether
+ALLEGRO_BITMAP* endcity;											//Fondo del End City
+
 ALLEGRO_BITMAP* steve;												//Personaje
 ALLEGRO_BITMAP* stevebmp;											//Imagen del personaje
 ALLEGRO_BITMAP* muertesteve;										//Imagen muerte
@@ -92,29 +102,6 @@ char facil[MAXFIL][MAXCOL] = {
 
 char medio[MAXFIL][MAXCOL] = {
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"X oooooooooooooooooooooooooo X",
-		"X X   X X X X XX X X X X   X X",
-		"X             oo             X",
-		"X X   X X X X XX X X X X   X X",
-		"X     oooooooooooooooooo     X",
-		"X X   X X X X XX X X X X   X X",
-		"X       X   X oo X   X       X",
-		"X X   X X X X XX X X X X   X X",
-		" |oooooooooooooooooooooooooo| ",
-		"X X   X X X X XX X X X X   X X",
-		"X       X   X oo X   X       X",
-		"X       X   X oo X   X       X",
-		"X X   X X X X XX X X X X   X X",
-		"X     oooooooooooooooooo     X",
-		"X X   X X X X XX X X X X   X X",
-		"X             oo             X",
-		"X X   X X X X XX X X X X   X X",
-		"X oooooooooooooooooooooooooo X",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-};
-
-char dificil[MAXFIL][MAXCOL] = {
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"X  o |o o o XXXXXX o o o| o  X",
 		"X XXX XX XX| o  o |XX XX XXX X",
 		"XoXXX XX XX XXXXXX XX XX XXXoX",
@@ -133,6 +120,29 @@ char dificil[MAXFIL][MAXCOL] = {
 		"X XXXoXXXX XXXXXXXXX XXX XXX X",
 		"XoXXXoXXXX           XXX XXXoX",
 		"X  o |o o  XXXXXXXXX o o| o  X",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+};
+
+char dificil[MAXFIL][MAXCOL] = {
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"X oooooooooooooooooooooooooo X",
+		"X X   X X X X XX X X X X   X X",
+		"X             oo             X",
+		"X X   X X X X XX X X X X   X X",
+		"X     oooooooooooooooooo     X",
+		"X X   X X X X XX X X X X   X X",
+		"X       X   X oo X   X       X",
+		"X X   X X X X XX X X X X   X X",
+		" |oooooooooooooooooooooooooo| ",
+		"X X   X X X X XX X X X X   X X",
+		"X       X   X oo X   X       X",
+		"X       X   X oo X   X       X",
+		"X X   X X X X XX X X X X   X X",
+		"X     oooooooooooooooooo     X",
+		"X X   X X X X XX X X X X   X X",
+		"X             XX             X",
+		"X X   X X X X    X X X X   X X",
+		"X oooooooooooooooooooooooooo X",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
 
@@ -160,13 +170,28 @@ int main()
 	al_init_acodec_addon();
 
 	//DAMOS VALORES A LAS VARIABLES CREADAS AL INCIO
+	//VENTANA Y MENUS
 	ventana = al_create_display(900, 600);
 	menu_null = al_load_bitmap("menu/menu_null.png");
 	menu_play = al_load_bitmap("menu/play.png");
 	menu_salir = al_load_bitmap("menu/salir.png");
+	
+	//TEXTURA MUROS
 	roca = al_load_bitmap("img/roca.png");
-	comida = al_load_bitmap("img/comida.png");
-	fondo = al_load_bitmap("img/fondo.png");
+	netherrack = al_load_bitmap("img/netherrack.png");
+	endstone = al_load_bitmap("img/endstone.png");
+	
+	//TEXTURA ITEMS
+	diamante = al_load_bitmap("img/diamante.png");
+	netherite = al_load_bitmap("img/netherite.png");
+	enderperl = al_load_bitmap("img/enderperl.png");
+	
+	//TEXTURA FONDO
+	cueva = al_load_bitmap("img/cueva.png");
+	nether = al_load_bitmap("img/nether.png");
+	endcity = al_load_bitmap("img/endcity.png");
+	
+	//TEXTURA PERSONAJE
 	steve = al_create_bitmap(33, 33);
 	stevebmp = al_load_bitmap("img/steve0.png");
 	muertesteve = al_load_bitmap("img/muerte2.png");
@@ -239,9 +264,9 @@ int main()
 					al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
-					//jugarfacil();
+					jugarfacil();
 					//jugarmedio();
-					jugardificil();
+					//jugardificil();
 				}
 			}
 			//POSICION CUANDO EL PUNTERO ESTE DENTRO DEL RECUADRO DE "SALIR"
@@ -272,11 +297,11 @@ void mapa_facil() {
 	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* sonidocomida = al_load_sample("sound/comida.wav");
-	al_reserve_samples(2);
+	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	al_reserve_samples(20);
 
 	//FONDO DE JUEGO
-	al_draw_bitmap(fondo, 0, 0, 0);
+	al_draw_bitmap(cueva, 0, 0, 0);
 
 	//CICLO QUE PINTARA LAS ROCAS EN LA POSICION DE LAS "X" Y MANZANAS EN LA POSICION DE LAS "o"
 	for (row = 0; row < MAXFIL; row++)
@@ -291,25 +316,11 @@ void mapa_facil() {
 			else if (facil[row][col] == 'o')
 			{
 				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
+				al_draw_bitmap(diamante, col * 30, row * 30, 0);
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-
-					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					facil[row][col] = 'N';
-
-				}
-			}
-			else if (facil[row][col] == 'N')
-			{
-				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
-				if ((py / 30 == row) && (px / 30 == col))
-				{
-					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					facil[row][col] = ' ';
@@ -318,9 +329,6 @@ void mapa_facil() {
 			}
 		}
 	}
-
-	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(sonidocomida);
 }
 
 //DIBUJO DE MAPA MEDIO
@@ -328,11 +336,11 @@ void mapa_medio() {
 	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* sonidocomida = al_load_sample("sound/comida.wav");
-	al_reserve_samples(2);
+	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	al_reserve_samples(20);
 
 	//FONDO DE JUEGO
-	al_draw_bitmap(fondo, 0, 0, 0);
+	al_draw_bitmap(nether, 0, 0, 0);
 
 	//CICLO QUE PINTARA LAS ROCAS EN LA POSICION DE LAS "X" Y MANZANAS EN LA POSICION DE LAS "o"
 	for (row = 0; row < MAXFIL; row++)
@@ -342,30 +350,16 @@ void mapa_medio() {
 			if (medio[row][col] == 'X')
 			{
 				//PINTAMOS MUROS
-				al_draw_bitmap(roca, col * 30, row * 30, 0);
+				al_draw_bitmap(netherrack, col * 30, row * 30, 0);
 			}
 			else if (medio[row][col] == 'o')
 			{
 				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
+				al_draw_bitmap(netherite, col * 30, row * 30, 0);
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-
-					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					medio[row][col] = 'N';
-
-				}
-			}
-			else if (medio[row][col] == 'N')
-			{
-				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
-				if ((py / 30 == row) && (px / 30 == col))
-				{
-					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					medio[row][col] = ' ';
@@ -374,9 +368,6 @@ void mapa_medio() {
 			}
 		}
 	}
-
-	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(sonidocomida);
 }
 
 //DIBUJO DE MAPA DIFICIL
@@ -384,11 +375,11 @@ void mapa_dificil() {
 	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* sonidocomida = al_load_sample("sound/comida.wav");
-	al_reserve_samples(2);
+	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	al_reserve_samples(20);
 
 	//FONDO DE JUEGO
-	al_draw_bitmap(fondo, 0, 0, 0);
+	al_draw_bitmap(endcity, 0, 0, 0);
 
 	//CICLO QUE PINTARA LAS ROCAS EN LA POSICION DE LAS "X" Y MANZANAS EN LA POSICION DE LAS "o"
 	for (row = 0; row < MAXFIL; row++)
@@ -398,30 +389,16 @@ void mapa_dificil() {
 			if (dificil[row][col] == 'X')
 			{
 				//PINTAMOS MUROS
-				al_draw_bitmap(roca, col * 30, row * 30, 0);
+				al_draw_bitmap(endstone, col * 30, row * 30, 0);
 			}
 			else if (dificil[row][col] == 'o')
 			{
 				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
+				al_draw_bitmap(enderperl, col * 30, row * 30, 0);
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-
-					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					dificil[row][col] = 'N';
-
-				}
-			}
-			else if (dificil[row][col] == 'N')
-			{
-				//PINTAMOS COMIDA
-				al_draw_bitmap(comida, col * 30, row * 30, 0);
-				if ((py / 30 == row) && (px / 30 == col))
-				{
-					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(sonidocomida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					dificil[row][col] = ' ';
@@ -430,9 +407,6 @@ void mapa_dificil() {
 			}
 		}
 	}
-
-	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(sonidocomida);
 }
 
 //DIBUJADO PERSONAJE
@@ -605,7 +579,7 @@ int jugarfacil()
 	al_reserve_samples(1);
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(100);
+	al_reserve_samples(10);
 	
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
@@ -623,7 +597,7 @@ int jugarfacil()
 
 		//ENEMIGOS
 		//Zombie
-		zombie A(30 * 1, 30 * 3);									//Creamos enemigo
+		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
 
 		//SONIDO DE CAMINAR
 		if (dir != 4)
@@ -663,8 +637,8 @@ int jugarfacil()
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_facil();													//Activamos la funcion que dibuja el Mapa
-		dibujar_steve();											//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();											//Activamos la creacion de un enemigo y movimiento del mismo
+		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
+		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
 		al_flip_display();
 	}
 
@@ -681,7 +655,7 @@ int jugarmedio()
 	al_reserve_samples(1);
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(100);
+	al_reserve_samples(10);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
@@ -757,7 +731,7 @@ int jugardificil()
 	al_reserve_samples(1);
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(100);
+	al_reserve_samples(10);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
