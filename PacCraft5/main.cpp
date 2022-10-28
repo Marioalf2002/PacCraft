@@ -32,6 +32,7 @@
 #include <cstdlib>													//Libreria que habilita mas funciones especiales
 #include <locale.h>													//Libreria que contiene la funcion setlocale
 #include <Windows.h>												//Libreria para medidas de pantalla
+
 #include <allegro5/allegro.h>										//Libreria base de Allegro
 #include <allegro5/allegro_image.h>									//Libreria para implementar Imagenes
 #include <allegro5/allegro_primitives.h>							//Libreria para primitivas
@@ -51,6 +52,11 @@ ALLEGRO_DISPLAY* ventana;											//Variable que contiene al Ventana
 ALLEGRO_BITMAP* menu_null;											//Variable que contiene imagen Menu Inicial
 ALLEGRO_BITMAP* menu_play;											//Variable que contiene imagen Menu Play
 ALLEGRO_BITMAP* menu_salir;											//Variable que contiene imagen Menu Salir
+
+ALLEGRO_BITMAP* modos;												//Variable que contiene imagen Menu Dificultades
+ALLEGRO_BITMAP* modo_facil;											//Variable que contiene imagen Menu Dificultades Facil
+ALLEGRO_BITMAP* modo_medio;											//Variable que contiene imagen Menu Dificultades Medio
+ALLEGRO_BITMAP* modo_dificil;										//Variable que contiene imagen Menu Dificultades Dificil
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
 
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
@@ -72,9 +78,11 @@ ALLEGRO_BITMAP* muertesteve;										//Imagen muerte
 int dir = 0;														//Direccion del Personaje
 int px = 30 * 14, py = 30 * 17;										//Posicion del Personaje
 int antpx, antpy;													//Posicion anteriro del Personaje
-int jugarfacil();													//Inicio de Funciones de juego Facil
-int jugarmedio();													//Inicio de Funciones de juego Medio
-int jugardificil();													//Inicio de Funciones de juego Dificil
+
+int jugarfacil();													//Inicio de Funcion de Juego Facil
+int jugarmedio();													//Inicio de Funcion de Juego Medio
+int jugardificil();													//Inicio de Funcion de Juego Dificil
+int dificultad();													//Inicio de Funcion de Menu Dificultades
 
 //MAPA DEL JUEGO
 char facil[MAXFIL][MAXCOL] = {
@@ -101,9 +109,10 @@ char facil[MAXFIL][MAXCOL] = {
 };
 
 char medio[MAXFIL][MAXCOL] = {
+
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"X  o |o o o XXXXXX o o o| o  X",
-		"X XXX XX XX| o  o |XX XX XXX X",
+		"X XXX XX XX| oooo |XX XX XXX X",
 		"XoXXX XX XX XXXXXX XX XX XXXoX",
 		"X      o|o   o  o   o|o      X",
 		"XoXXXoXX XXX XXXX XXX XXoXXXoX",
@@ -156,7 +165,7 @@ int main()
 	//INICIALIZAMOS ALLEGRO
 	if (!al_init())
 	{
-		al_show_native_message_box(NULL, "ERROR CRITICO", "ERROR: 404", "No se pudo cargar correctamente la libreria Allegro", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+		al_show_native_message_box(NULL, "ERROR CRITICO", "ERROR: 404", "No se pudo cargar correctamente la libreria Allegro 5", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 	}
 
 	//INICIALIZAMOS LIBRERIAS
@@ -170,12 +179,9 @@ int main()
 	al_init_acodec_addon();
 
 	//DAMOS VALORES A LAS VARIABLES CREADAS AL INCIO
-	//VENTANA Y MENUS
+	//VENTANA
 	ventana = al_create_display(900, 600);
-	menu_null = al_load_bitmap("menu/menu_null.png");
-	menu_play = al_load_bitmap("menu/play.png");
-	menu_salir = al_load_bitmap("menu/salir.png");
-	
+
 	//TEXTURA MUROS
 	roca = al_load_bitmap("img/roca.png");
 	netherrack = al_load_bitmap("img/netherrack.png");
@@ -213,7 +219,12 @@ int main()
 	//REGISTRO DE EVENTOS
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
-	
+
+	//MENUS INICIAL
+	menu_null = al_load_bitmap("menu/menu.png");
+	menu_play = al_load_bitmap("menu/play.png");
+	menu_salir = al_load_bitmap("menu/salir.png");
+
 	//VARIABLES QUE CONTENDRAN POSICION DE MOUSE Y CLICKS
 	int x = -1, y = -1;
 	int botones[] = { 0 };
@@ -228,7 +239,6 @@ int main()
 	//CICLO QUE TENDRA EL PROGRAMA ACTIVO "MENU"
 	while (!GetAsyncKeyState(VK_ESCAPE))							//Para cerrar el Programa se espera la señal de tecla "ESC"
 	{
-
 		ALLEGRO_EVENT Evento;										//Variable que llevara el Evento a registrar
 		al_wait_for_event(event_queue, &Evento);
 
@@ -264,9 +274,7 @@ int main()
 					al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
-					jugarfacil();
-					//jugarmedio();
-					//jugardificil();
+					dificultad();
 				}
 			}
 			//POSICION CUANDO EL PUNTERO ESTE DENTRO DEL RECUADRO DE "SALIR"
@@ -287,9 +295,117 @@ int main()
 
 		//SIEMPRE COLOCAR PARA QUE SE PUEDA PINTAR TODO LO QUE SOLICITEMOS
 		al_flip_display();
-
 	}
 	return 0;
+}
+
+//MENU DE DIFICULTADES
+int dificultad()
+{
+	//MENUS DIFICULTADES
+	modos = al_load_bitmap("menu/modo.png");
+	modo_facil = al_load_bitmap("menu/facil.png");
+	modo_medio = al_load_bitmap("menu/medio.png");
+	modo_dificil = al_load_bitmap("menu/dificil.png");
+
+	//VARIABLES QUE CONTENDRAN POSICION DE MOUSE Y CLICKS
+	int x = -1, y = -1;
+	int botones[] = { 0 };
+
+	//CREAMOS VARIABLES DE SONIDO MENU
+	ALLEGRO_SAMPLE* menu = al_load_sample("sound/musica.wav");
+	al_reserve_samples(1);
+
+	//ACTIVAMOS MUSICA DE MENU
+	al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+
+	//CICLO QUE TENDRA EL PROGRAMA ACTIVO "MENU"
+	while (!GetAsyncKeyState(VK_ESCAPE))							//Para cerrar el Programa se espera la señal de tecla "ESC"
+	{
+		ALLEGRO_EVENT Evento;										//Variable que llevara el Evento a registrar
+		al_wait_for_event(event_queue, &Evento);
+
+		al_clear_to_color(al_map_rgb(0, 0, 0));						//Limpiamos todo color que tengamos para liberar memoria
+
+		//VALIDAMOS CLICK PARA ACTIVAR MENU DEPENDIENDO UBICACION DEL PUNTERO
+		if (botones[0] == 0) {
+			al_draw_bitmap(modos, 0, 0, 0);							//Pintamos lo que contenga la variable "modos"
+		}
+		else if (botones[0] == 1)
+		{
+			al_draw_bitmap(modo_facil, 0, 0, 0);					//Pintamos lo que contenga la variable "modo_facil"
+		}
+		else if (botones[0] == 2)
+		{
+			al_draw_bitmap(modo_medio, 0, 0, 0);					//Pintamos lo que contenga la variable "modo_medio"
+		}
+		else if (botones[0] == 3)
+		{
+			al_draw_bitmap(modo_dificil, 0, 0, 0);					//Pintamos lo que contenga la variable "modo_dificil"
+		}
+
+		//CONDICIONES PARA CONTROLAR LA UBICACION DEL MOUSE
+		if (Evento.type == ALLEGRO_EVENT_MOUSE_AXES || Evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
+		{
+			x = Evento.mouse.x;
+			y = Evento.mouse.y;
+
+			//POSICION CUANDO EL PUNTERO ESTE DENTRO DEL RECUADRO DE FACIL
+			if (x >= 610 && x <= 785 && y >= 253 && y <= 309)
+			{
+				botones[0] = 1;
+				if (Evento.mouse.button & 1)
+				{
+					//LIBERAMOS MEMORIA DE SONIDO
+					al_destroy_sample(menu);
+
+					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
+					jugarfacil();
+					
+				}
+			}
+
+			//POSICION CUANDO EL PUNTERO ESTE DENTRO DEL RECUADRO DE MEDIO
+			else if (x >= 569 && x <= 829 && y >= 330 && y <= 390)
+			{
+				botones[0] = 2;
+				if (Evento.mouse.button & 1)
+				{
+					//LIBERAMOS MEMORIA DE SONIDO
+					al_destroy_sample(menu);
+
+					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
+					jugarmedio();
+				}
+			}
+
+			//POSICION CUANDO EL PUNTERO ESTE DENTRO DEL RECUADRO DE DIFICIL
+			else if (x >= 511 && x <= 878 && y >= 406 && y <= 466)
+			{
+				botones[0] = 3;
+				if (Evento.mouse.button & 1)
+				{
+					//LIBERAMOS MEMORIA DE SONIDO
+					al_destroy_sample(menu);
+
+					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
+					jugardificil();
+				}
+			}
+
+			//POSICION CUANDO EL PUNTERO ESTE FUERA DEL LAS OPCIONES
+			else
+			{
+				botones[0] = 0;
+			}
+		}
+
+		//SIEMPRE COLOCAR PARA QUE SE PUEDA PINTAR TODO LO QUE SOLICITEMOS
+		al_flip_display();
+
+	}
+
+	return 1;
 }
 
 //DIBUJADO DE MAPA FACIL
@@ -585,7 +701,7 @@ int jugarfacil()
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over_facil()) )		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over_facil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
 		//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
 		ALLEGRO_EVENT events;
@@ -673,7 +789,7 @@ int jugarmedio()
 
 		//ENEMIGOS
 		//Zombie
-		zombie A(30 * 1, 30 * 3);									//Creamos enemigo
+		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
 
 		//SONIDO DE CAMINAR
 		if (dir != 4)
@@ -713,8 +829,8 @@ int jugarmedio()
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_medio();													//Activamos la funcion que dibuja el Mapa
-		dibujar_steve();											//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();											//Activamos la creacion de un enemigo y movimiento del mismo
+		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
+		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
 		al_flip_display();
 	}
 
@@ -749,7 +865,7 @@ int jugardificil()
 
 		//ENEMIGOS
 		//Zombie
-		zombie A(30 * 1, 30 * 3);									//Creamos enemigo
+		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
 
 		//SONIDO DE CAMINAR
 		if (dir != 4)
@@ -789,8 +905,8 @@ int jugardificil()
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_dificil();													//Activamos la funcion que dibuja el Mapa
-		dibujar_steve();											//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();											//Activamos la creacion de un enemigo y movimiento del mismo
+		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
+		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
 		al_flip_display();
 	}
 
