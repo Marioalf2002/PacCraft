@@ -58,6 +58,7 @@ ALLEGRO_BITMAP* modo_facil;											//Variable que contiene imagen Menu Dificu
 ALLEGRO_BITMAP* modo_medio;											//Variable que contiene imagen Menu Dificultades Medio
 ALLEGRO_BITMAP* modo_dificil;										//Variable que contiene imagen Menu Dificultades Dificil
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
+ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
 
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
 ALLEGRO_BITMAP* netherrack;											//Variable que contiene Textura Netherrack
@@ -72,12 +73,39 @@ ALLEGRO_BITMAP* nether;												//Fondo del Nether
 ALLEGRO_BITMAP* endcity;											//Fondo del End City
 
 ALLEGRO_BITMAP* steve;												//Personaje
-ALLEGRO_BITMAP* stevebmp;											//Imagen del personaje
+ALLEGRO_BITMAP* stevebmp;											//Imagen del personaje Derecha
 ALLEGRO_BITMAP* muertesteve;										//Imagen muerte
 
-int dir = 0;														//Direccion del Personaje
+ALLEGRO_BITMAP* zombie;												//Imagen del Zombie
+ALLEGRO_BITMAP* esqueleto;											//Imagen del Esqueleto
+ALLEGRO_BITMAP* creeper;											//Imagen del Creeper
+ALLEGRO_BITMAP* arana;												//Imagen del Araña
+
+ALLEGRO_BITMAP* whither;											//Imagen del Whiter
+ALLEGRO_BITMAP* piglin;												//Imagen del Piglin
+ALLEGRO_BITMAP* zombipiglin;										//Imagen del ZombiPiglin
+ALLEGRO_BITMAP* blaze;												//Imagen del Blaze
+
+ALLEGRO_BITMAP* enderman;											//Imagen del Enderman
+ALLEGRO_BITMAP* dragon;												//Imagen del Dragon
+
+
 int px = 30 * 14, py = 30 * 17;										//Posicion del Personaje
-int antpx, antpy;													//Posicion anteriro del Personaje
+int antpx, antpy;													//Posicion anterior del Personaje
+
+int zy = 30 * 1, zx = 30 * 1;										//Posicion del Zombie
+int ey = 30 * 10, ex = 30 * 5;										//Posicion del Esqueleto
+int cy = 30 * 1, cx = 30 * 25;										//Posicion del Creeper
+int ary = 30 * 9, arx = 30 * 25;									//Posicion del Araña
+int wy = 30 * 1, wx = 30 * 1;										//Posicion del Whither
+int zpy = 30 * 10, zpx = 30 * 5;									//Posicion del Zombie Piglin
+int piy = 30 * 1, pix = 30 * 25;									//Posicion del Piglin
+int by = 30 * 9, bx = 30 * 25;										//Posicion del Blaze
+int eny = 30 * 1, enx = 30 * 1;										//Posicion del Enderman
+int eny2 = 30 * 10, enx2 = 30 * 5;									//Posicion del Enderman 2
+int eny3 = 30 * 1, enx3 = 30 * 25;									//Posicion del Enderman 3
+int eny4 = 30 * 9, enx4 = 30 * 25;									//Posicion del Enderman 4
+int dy = 30 * 9, dx = 30 * 14;										//Posicion del Dragon
 
 int jugarfacil();													//Inicio de Funcion de Juego Facil
 int jugarmedio();													//Inicio de Funcion de Juego Medio
@@ -87,23 +115,23 @@ int dificultad();													//Inicio de Funcion de Menu Dificultades
 //MAPA DEL JUEGO
 char facil[MAXFIL][MAXCOL] = {
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"X    |     |XXXXXX|     |    X",
-		"X XXX XXXXX|oooooo|XXXXX XXX X",
-		"X|ooo|    X XXXXXX XX   |ooo|X",
+		"X           XXXXXX           X",
+		"X XXX XXXXX oooooo XXXXX XXX X",
+		"X ooo     X XXXXXX XX    ooo X",
 		"X XXX XX     XXXX     XX XXX X",
 		"X XXX XX      XX      XX XXX X",
-		"X|ooo|XX XXXX oo XXXX XX|ooo|X",
+		"X ooo XX XXXX oo XXXX XX ooo X",
 		"X XXX XX XXXX oo XXXX XX XXX X",
 		"X XXX XX XXXX oo XXXX XX XXX X",
-		" |ooo|XX     XXXX     XX|ooo| ",
+		" |ooo XX     XXXX     XX ooo| ",
 		"X XXX XX X XXXXXXXX X XX XXX X",
 		"X XXX XX X XXXXXXXX X XX XXX X",
 		"X XXX XX X XXooooXX X XX XXX X",
-		"X|ooo|XX  | | XX | |  XX|ooo|X",
+		"X ooo XX      XX      XX ooo X",
 		"X XXX XXXXXX XXXX XXXXXX XXX X",
 		"X XXX XX     XXXX     XX XXX X",
 		"X XXX XX XXXXXXXXXXXX XX XXX X",
-		"X XXX|  |            |  |XXX X",
+		"X XXX                    XXX X",
 		"X oooooooo  XXXXXX  oooooooo X",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
@@ -111,24 +139,24 @@ char facil[MAXFIL][MAXCOL] = {
 char medio[MAXFIL][MAXCOL] = {
 
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"X  o |o o o XXXXXX o o o| o  X",
-		"X XXX XX XX| oooo |XX XX XXX X",
-		"XoXXX XX XX XXXXXX XX XX XXXoX",
-		"X      o|o   o  o   o|o      X",
+		"X  o    o   XXXXXX   o    o  X",
+		"X XXX XX XX        XX XX XXX X",
+		"X XXX XX XX XXXXXX XX XX XXX X",
+		"X      o o   o  o   o o      X",
 		"XoXXXoXX XXX XXXX XXX XXoXXXoX",
-		"X    |XX    |XXXX|    XX     X",
+		"X     XX     XXXX     XX     X",
 		"XoXXXoXXXXXX XXXX XXXXXXoXXXoX",
-		"X XXX|o  ooo|   ||ooo  o|XXX X",
-		" |   |XX XXXX XX XXXX XX|   | ",
+		"X XXX o  ooo      ooo  o XXX X",
+		" |    XX XXXX XX XXXX XX    | ",
 		"X XXXoXX XXXX XX XXXX XXoXXX X",
-		"XoXXXo   ooo||   |ooo   oXXXoX",
+		"XoXXXo   ooo      ooo   oXXXoX",
 		"X XXXoXXXXXX XXXX XXXXXXoXXX X",
-		"X    |XX    |XXXX|    XX|    X",
+		"X     XX     XXXX     XX     X",
 		"X XXXoXX XXXXXXXXXXXX XXoXXX X",
-		"XoXXX| o|  ooooooooo |o |XXXoX",
+		"XoXXX  o   o o o o o  o  XXXoX",
 		"X XXXoXXXX XXXXXXXXX XXX XXX X",
 		"XoXXXoXXXX           XXX XXXoX",
-		"X  o |o o  XXXXXXXXX o o| o  X",
+		"X  o  o o  XXXXXXXXX o o  o  X",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
 
@@ -199,8 +227,20 @@ int main()
 	
 	//TEXTURA PERSONAJE
 	steve = al_create_bitmap(33, 33);
-	stevebmp = al_load_bitmap("img/steve0.png");
+	stevebmp = al_load_bitmap("img/steve1.png");
 	muertesteve = al_load_bitmap("img/muerte2.png");
+
+	//TEXRURA ENEMIGOS
+	zombie = al_load_bitmap("img/zombie.png");
+	esqueleto = al_load_bitmap("img/esqueleto.png");
+	creeper = al_load_bitmap("img/creeper.png");
+	arana = al_load_bitmap("img/arana.png");
+	whither = al_load_bitmap("img/wither.png");
+	piglin = al_load_bitmap("img/piglin.png");
+	zombipiglin = al_load_bitmap("img/zombiepiglin.png");
+	blaze = al_load_bitmap("img/blaze.png");
+	enderman = al_load_bitmap("img/enderman.png");
+	dragon = al_load_bitmap("img/dragon.png");
 
 	//CREAMOS EL TIPO DE LETRA CON TAMAÑO
 	ALLEGRO_FONT* font = al_load_font("fonts/Minecraft.ttf", 70, 0);
@@ -215,10 +255,11 @@ int main()
 
 	//CREAMOS DECTOR DE EVENTOS
 	event_queue = al_create_event_queue();
+	event_queue_teclado = al_create_event_queue();
 
 	//REGISTRO DE EVENTOS
 	al_register_event_source(event_queue, al_get_mouse_event_source());
-	al_register_event_source(event_queue, al_get_keyboard_event_source());
+	al_register_event_source(event_queue_teclado, al_get_keyboard_event_source());
 
 	//MENUS INICIAL
 	menu_null = al_load_bitmap("menu/menu.png");
@@ -313,7 +354,7 @@ int dificultad()
 	int botones[] = { 0 };
 
 	//CREAMOS VARIABLES DE SONIDO MENU
-	ALLEGRO_SAMPLE* menu = al_load_sample("sound/musica.wav");
+	ALLEGRO_SAMPLE* menu = al_load_sample("sound/musicad.wav");
 	al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE MENU
@@ -525,123 +566,657 @@ void mapa_dificil() {
 	}
 }
 
-//DIBUJADO PERSONAJE
+//DIBUJO ENEMIGOS
+//FACIL
+void dibujar_zombie()
+{
+	al_draw_bitmap(zombie, zx, zy, 0);
+}
+
+void dibujar_esqueleto()
+{
+	al_draw_bitmap(esqueleto, ex, ey, 0);
+}
+
+void dibujar_creeper()
+{
+	al_draw_bitmap(creeper, cx, cy, 0);
+}
+
+void dibujar_arana()
+{
+	al_draw_bitmap(arana, arx, ary, 0);
+}
+
+//MEDIO
+void dibujar_whither()
+{
+	al_draw_bitmap(whither, wx, wy, 0);
+}
+
+void dibujar_piglin()
+{
+	al_draw_bitmap(piglin, pix, piy, 0);
+}
+
+void dibujar_zombiepiglin()
+{
+	al_draw_bitmap(zombipiglin, zpx, zpy, 0);
+}
+
+void dibujar_blaze()
+{
+	al_draw_bitmap(blaze, bx, by, 0);
+}
+
+//DIFICIL
+void dibujar_enderman()
+{
+	al_draw_bitmap(enderman, enx, eny, 0);
+	al_draw_bitmap(enderman, enx2, eny2, 0);
+	al_draw_bitmap(enderman, enx3, eny3, 0);
+	al_draw_bitmap(enderman, enx4, eny4, 0);
+}
+
+void dibujar_dragon()
+{
+	al_draw_bitmap(dragon, dx, dy, 0);
+}
+
+//ENEMIGOS
+//FACIL
+void movimiento_zombie_facil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[zy / 30][zx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (facil[zy / 30][(zx - 30) / 30] != 'X') zx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (facil[zy / 30][(zx + 30) / 30] != 'X') zx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (facil[(zy - 30) / 30][zx / 30] != 'X') zy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (facil[(zy + 30) / 30][zx / 30] != 'X') zy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (zx <= -30)zx = 870;
+	else if (zx >= 870)zx = -30;
+}
+
+void movimiento_esqueleto_facil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[ey / 30][ex / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (facil[ey / 30][(ex - 30) / 30] != 'X') ex -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (facil[ey / 30][(ex + 30) / 30] != 'X') ex += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (facil[(ey - 30) / 30][ex / 30] != 'X') ey -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (facil[(ey + 30) / 30][ex / 30] != 'X') ey += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (ex <= -30)ex = 870;
+	else if (ex >= 870)ex = -30;
+}
+
+void movimiento_creeper_facil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[cy / 30][cx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (facil[cy / 30][(cx - 30) / 30] != 'X') cx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (facil[cy / 30][(cx + 30) / 30] != 'X') cx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (facil[(cy - 30) / 30][cx / 30] != 'X') cy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (facil[(cy + 30) / 30][cx / 30] != 'X') cy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (cx <= -30)cx = 870;
+	else if (cx >= 870)cx = -30;
+}
+
+void movimiento_araña_facil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[ary / 30][arx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (facil[ary / 30][(arx - 30) / 30] != 'X') arx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (facil[ary / 30][(arx + 30) / 30] != 'X') arx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (facil[(ary - 30) / 30][arx / 30] != 'X') ary -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (facil[(ary + 30) / 30][arx / 30] != 'X') ary += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (arx <= -30)arx = 870;
+	else if (arx >= 870)arx = -30;
+}
+
+//MEDIO
+void movimiento_whither_medio()
+{
+	int wdir = rand() % 4;
+
+	if (facil[wy / 30][wx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (medio[wy / 30][(wx - 30) / 30] != 'X') wx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (medio[wy / 30][(wx + 30) / 30] != 'X') wx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (medio[(wy - 30) / 30][wx / 30] != 'X') wy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (medio[(wy + 30) / 30][wx / 30] != 'X') wy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (wx <= -30)wx = 870;
+	else if (wx >= 870)wx = -30;
+}
+
+void movimiento_piglin_medio()
+{
+	int wdir = rand() % 4;
+
+	if (facil[piy / 30][pix / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (medio[piy / 30][(pix - 30) / 30] != 'X') pix -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (medio[piy / 30][(pix + 30) / 30] != 'X') pix += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (medio[(piy - 30) / 30][pix / 30] != 'X') piy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (medio[(piy + 30) / 30][pix / 30] != 'X') piy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (pix <= -30)pix = 870;
+	else if (pix >= 870)pix = -30;
+}
+
+void movimiento_zombiepiglin_medio()
+{
+	int wdir = rand() % 4;
+
+	if (facil[zpy / 30][zpx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (medio[zpy / 30][(zpx - 30) / 30] != 'X') zpx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (medio[zpy / 30][(zpx + 30) / 30] != 'X') zpx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (medio[(zpy - 30) / 30][zpx / 30] != 'X') zpy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (medio[(zpy + 30) / 30][zpx / 30] != 'X') zpy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (zpx <= -30)zpx = 870;
+	else if (zpx >= 870)zpx = -30;
+}
+
+void movimiento_blaze_medio()
+{
+	int wdir = rand() % 4;
+
+	if (facil[by / 30][bx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (medio[by / 30][(bx - 30) / 30] != 'X') bx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (medio[by / 30][(bx + 30) / 30] != 'X') bx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (medio[(by - 30) / 30][bx / 30] != 'X') by -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (medio[(by + 30) / 30][bx / 30] != 'X') by += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (bx <= -30)bx = 870;
+	else if (bx >= 870)bx = -30;
+}
+
+//DIFICIL
+void movimiento_enderman_dificil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[eny / 30][enx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (dificil[eny / 30][(enx - 30) / 30] != 'X') enx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (dificil[eny / 30][(enx + 30) / 30] != 'X') enx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (dificil[(eny - 30) / 30][enx / 30] != 'X') eny -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (dificil[(eny + 30) / 30][enx / 30] != 'X') eny += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (dificil[eny2 / 30][(enx2 - 30) / 30] != 'X') enx2 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (dificil[eny2 / 30][(enx2 + 30) / 30] != 'X') enx2 += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (dificil[(eny2 - 30) / 30][enx2 / 30] != 'X') eny2 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (dificil[(eny2 + 30) / 30][enx2 / 30] != 'X') eny2 += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (dificil[eny3 / 30][(enx3 - 30) / 30] != 'X') enx3 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (dificil[eny3 / 30][(enx3 + 30) / 30] != 'X') enx3 += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (dificil[(eny3 - 30) / 30][enx3 / 30] != 'X') eny3 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (dificil[(eny3 + 30) / 30][enx3 / 30] != 'X') eny3 += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (dificil[eny4 / 30][(enx4 - 30) / 30] != 'X') enx4 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (dificil[eny4 / 30][(enx4 + 30) / 30] != 'X') enx4 += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (dificil[(eny4 - 30) / 30][enx4 / 30] != 'X') eny4 -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (dificil[(eny4 + 30) / 30][enx4 / 30] != 'X') eny4 += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (enx <= -30)enx = 870;
+	else if (enx >= 870)enx = -30;
+	if (enx2 <= -30)enx2 = 870;
+	else if (enx2 >= 870)enx2 = -30;
+	if (enx3 <= -30)enx3 = 870;
+	else if (enx3 >= 870)enx3 = -30;
+	if (enx4 <= -30)enx4 = 870;
+	else if (enx4 >= 870)enx4 = -30;
+}
+
+void movimiento_dragon_dificil()
+{
+	int wdir = rand() % 4;
+
+	if (facil[dy / 30][dx / 30] == '|')
+	{
+		wdir = rand() % 4;
+	}
+
+	switch (wdir)
+	{
+	case 0:
+		if (dificil[dy / 30][(dx - 30) / 30] != 'X') dx -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 1:
+		if (dificil[dy / 30][(dx + 30) / 30] != 'X') dx += 30;
+		else wdir = rand() % 4;
+		break;
+	case 2:
+		if (dificil[(dy - 30) / 30][dx / 30] != 'X') dy -= 30;
+		else wdir = rand() % 4;
+		break;
+	case 3:
+		if (dificil[(dy + 30) / 30][dx / 30] != 'X') dy += 30;
+		else wdir = rand() % 4;
+		break;
+	}
+
+	cout << wdir << endl;
+
+	//Atajo
+	if (dx <= -30)dx = 870;
+	else if (dx >= 870)dx = -30;
+}
+
+//DIBUJADO PERSONAJE DERECHA
 void dibujar_steve()
 {
 	al_draw_bitmap(stevebmp, px, py, 0);
 }
 
-//ZOMBIE
-class zombie
+//MOVIMIENTO PERSONAJE
+void mover_personaje_facil()
 {
-	ALLEGRO_BITMAP* zombiebmp;
-	ALLEGRO_BITMAP* zombie1;
-	int fdir= rand() % 4;
-	int _x, _y;
+	//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
+	ALLEGRO_EVENT events;
+	al_wait_for_event(event_queue_teclado, &events);
 
-public:
-	zombie(int x, int y); //Constructor
-	void dibujarzombie() const;
-	void moverzombie();
-	void choquezombie();
-};
+	//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
+	antpx = px;
+	antpy = py;
 
-zombie::zombie(int x, int y)
-{
-	_x = x;
-	_y = y;
-	fdir = rand() % 4;
+	//TECLAS DE MOVIMIENTO
 
-	zombie1 = al_create_bitmap(30, 30);
-	zombiebmp = al_load_bitmap("img/zombie.png");
-}
-
-void zombie::dibujarzombie() const
-{
-	al_draw_bitmap(zombiebmp, _x, _y, 0);
-}
-
-void zombie::choquezombie()
-{
-	ALLEGRO_SAMPLE* muerte = al_load_sample("sound/muerte.wav");
-	al_reserve_samples(3);
-
-	if (((py == _y) && (px == _x)) || ((_y == antpy) && (_x == antpx)))
+	if (events.type == ALLEGRO_EVENT_KEY_DOWN)
 	{
-		//ACTIVAMOS SONIDO DE MUERTE
-		al_play_sample(muerte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		for (int i = 0; i <= 1; i++)
+		if (events.keyboard.keycode == ALLEGRO_KEY_A || events.keyboard.keycode == ALLEGRO_KEY_LEFT)
 		{
-			mapa_facil();
-			//mapa_medio();
-			//mapa_dificil();
+			if (facil[py / 30][(px - 30) / 30] != 'X') px -= 30;
 		}
-		
+		else if (events.keyboard.keycode == ALLEGRO_KEY_W || events.keyboard.keycode == ALLEGRO_KEY_UP)
+		{
+			if (facil[(py - 30) / 30][px / 30] != 'X') py -= 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_D || events.keyboard.keycode == ALLEGRO_KEY_RIGHT)
+		{
+			if (facil[py / 30][(px + 30) / 30] != 'X') px += 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_S || events.keyboard.keycode == ALLEGRO_KEY_DOWN)
+		{
+			if (facil[(py + 30) / 30][px / 30] != 'X') py += 30;
+		}
+	}
+
+	//ATAJOS DEL MAPA
+	if (px <= -30)px = 870;
+	else if (px >= 870)px = -30;
+}
+
+void mover_personaje_medio()
+{
+	//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
+	ALLEGRO_EVENT events;
+	al_wait_for_event(event_queue_teclado, &events);
+
+	//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
+	antpx = px;
+	antpy = py;
+
+	//TECLAS DE MOVIMIENTO
+	if (events.type == ALLEGRO_EVENT_KEY_DOWN)
+	{
+		if (events.keyboard.keycode == ALLEGRO_KEY_A || events.keyboard.keycode == ALLEGRO_KEY_LEFT)
+		{
+			if (medio[py / 30][(px - 30) / 30] != 'X') px -= 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_W || events.keyboard.keycode == ALLEGRO_KEY_UP)
+		{
+			if (medio[(py - 30) / 30][px / 30] != 'X') py -= 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_D || events.keyboard.keycode == ALLEGRO_KEY_RIGHT)
+		{
+			if (medio[py / 30][(px + 30) / 30] != 'X') px += 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_S || events.keyboard.keycode == ALLEGRO_KEY_DOWN)
+		{
+			if (medio[(py + 30) / 30][px / 30] != 'X') py += 30;
+		}
+	}
+
+	//ATAJOS DEL MAPA
+	if (px <= -30)px = 870;
+	else if (px >= 870)px = -30;
+}
+
+void mover_personaje_dificil()
+{
+	//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
+	ALLEGRO_EVENT events;
+	al_wait_for_event(event_queue_teclado, &events);
+
+	//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
+	antpx = px;
+	antpy = py;
+
+	//TECLAS DE MOVIMIENTO
+	if (events.type == ALLEGRO_EVENT_KEY_DOWN)
+	{
+		if (events.keyboard.keycode == ALLEGRO_KEY_A || events.keyboard.keycode == ALLEGRO_KEY_LEFT)
+		{
+			if (dificil[py / 30][(px - 30) / 30] != 'X') px -= 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_W || events.keyboard.keycode == ALLEGRO_KEY_UP)
+		{
+			if (dificil[(py - 30) / 30][px / 30] != 'X') py -= 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_D || events.keyboard.keycode == ALLEGRO_KEY_RIGHT)
+		{
+			if (dificil[py / 30][(px + 30) / 30] != 'X') px += 30;
+		}
+		else if (events.keyboard.keycode == ALLEGRO_KEY_S || events.keyboard.keycode == ALLEGRO_KEY_DOWN)
+		{
+			if (dificil[(py + 30) / 30][px / 30] != 'X') py += 30;
+		}
+	}
+
+	//ATAJOS DEL MAPA
+	if (px <= -30)px = 870;
+	else if (px >= 870)px = -30;
+}
+
+//MUERTE
+void choque_facil()
+{
+	if 
+		(
+		((py == zy) && (px == zx)) || ((zy == antpy) && (zx == antpx))
+		|| ((py == ey) && (px == ex)) || ((ey == antpy) && (ex == antpx))
+		|| ((py == cy) && (px == cx)) || ((cy == antpy) && (cx == antpx))
+		|| ((py == ary) && (px == arx)) || ((ary == antpy) && (arx == antpx))
+		)
+	{
+		mapa_facil();
+		dibujar_steve();
 		px = 30 * 14;
 		py = 30 * 17;
-		dir = 4;
 	}
-	al_destroy_sample(muerte);
-	al_flip_display();
 }
 
-void zombie::moverzombie()
+void choque_medio()
 {
-	dibujarzombie();
-	choquezombie();
+	if 
+		(
+		((py == wy) && (px == wx)) || ((wy == antpy) && (wx == antpx))
+		|| ((py == piy) && (px == pix)) || ((piy == antpy) && (pix == antpx))
+		|| ((py == zpy) && (px == zpx)) || ((zpy == antpy) && (zpx == antpx))
+		|| ((by == wy) && (bx == wx)) || ((by == antpy) && (bx == antpx))
+		)
+	{
+		mapa_medio();
+		dibujar_steve();
+		px = 30 * 14;
+		py = 30 * 17;
+	}
+}
 
-	fdir = rand() % 4;
-	
-	if (facil[_y / 30][_x / 30] == '|')
+void choque_dificil()
+{
+	if 
+		(
+		((py == eny) && (px == enx)) || ((eny == antpy) && (enx == antpx))
+		|| ((py == dy) && (px == dx)) || ((dy == antpy) && (dx == antpx))
+		)
 	{
-		fdir = rand() % 4;
+		mapa_dificil();
+		dibujar_steve();
+		px = 30 * 14;
+		py = 30 * 17;
 	}
-	
-	if (fdir == 0)
-	{
-		if (facil[_y / 30][(_x - 30) / 30] != 'X') _x -= 30;
-		else fdir = rand() % 4;
-	}
-	else if (fdir == 1)
-	{
-		if (facil[_y / 30][(_x + 30) / 30] != 'X') _x += 30;
-		else fdir = rand() % 4;
-	}
-	else if (fdir == 2)
-	{
-		if (facil[(_y - 30) / 30][_x / 30] != 'X') _y -= 30;
-		else fdir = rand() % 4;
-	}
-	else if (fdir == 3)
-	{
-		if (facil[(_y + 30) / 30][_x / 30] != 'X') _y += 30;
-		else fdir = rand() % 4;
-	}
-	
-	/*
-	switch (fdir)
-	{
-	case 0:
-		if (mapa[_y / 30][(_x - 30) / 30] != 'X') _x -= 30;
-		else fdir = rand() % 4;
-		break;
-	case 1:
-		if (mapa[_y / 30][(_x + 30) / 30] != 'X') _x += 30;
-		else fdir = rand() % 4;
-		break;
-	case 2:
-		if (mapa[(_y - 30) / 30][_x / 30] != 'X') _y -= 30;
-		else fdir = rand() % 4;
-		break;
-	case 3:
-		if (mapa[(_y + 30) / 30][_x / 30] != 'X') _y += 30;
-		else fdir = rand() % 4;
-		break;
-	}
-	*/
-	//Atajo
-	if (_x <= -30)_x = 870;
-	else if (_x >= 870)_x = -30;
 }
 
 //FIN DE JUEGO
@@ -655,6 +1230,11 @@ bool game_over_facil()
 			if (facil[row][col] == 'o') return true;
 		}
 	}
+
+	mapa_facil();
+	dibujar_steve();
+	px = 30 * 14;
+	py = 30 * 17;
 
 	return false;
 }
@@ -670,6 +1250,11 @@ bool game_over_medio()
 		}
 	}
 
+	mapa_medio();
+	dibujar_steve();
+	px = 30 * 14;
+	py = 30 * 17;
+
 	return false;
 }
 
@@ -684,6 +1269,11 @@ bool game_over_dificil()
 		}
 	}
 
+	mapa_dificil();
+	dibujar_steve();
+	px = 30 * 14;
+	py = 30 * 17;
+
 	return false;
 }
 
@@ -693,85 +1283,44 @@ int jugarfacil()
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
 	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
 	al_reserve_samples(1);
-	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(10);
 	
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
-
+	
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over_facil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
-	{
-		//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
-		ALLEGRO_EVENT events;
-		al_wait_for_event(event_queue, &events);
-
-		//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
-		antpx = px;
-		antpy = py;
-
-		//ENEMIGOS
-		//Zombie
-		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
-
-		//SONIDO DE CAMINAR
-		if (dir != 4)
-		{
-			//ACTIVAMOS SONIDO DE CAMINAR
-			al_play_sample(caminar, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		}
-
-		//TECLAS DE MOVIMIENTO
-		if(events.type == ALLEGRO_EVENT_KEY_DOWN)
-		{
-            switch(events.keyboard.keycode)
-			{
-			case ALLEGRO_KEY_DOWN:
-				if (facil[(py + 30) / 30][px / 30] != 'X') py += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_UP:
-				if (facil[(py - 30) / 30][px / 30] != 'X') py -= 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				if (facil[py / 30][(px + 30) / 30] != 'X') px += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_LEFT:
-				if (facil[py / 30][(px - 30) / 30] != 'X') px -= 30;
-				else dir = 4;
-				break;
-			}
-		}
-
-		//ATAJOS DEL MAPA
-		if (px <= -30)px = 870;
-		else if (px >= 870)px = -30;
+	{		
+		al_clear_to_color(al_map_rgb(0, 0, 0));		
 		
-		al_clear_to_color(al_map_rgb(0, 0, 0));
-
 		mapa_facil();													//Activamos la funcion que dibuja el Mapa
-		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
+
+		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
+		mover_personaje_facil();										//Activamos movimiento Personaje
+
+		dibujar_zombie();												//Activamos la funcion que dibuja al Zombie
+		dibujar_esqueleto();											//Activamos la funcion que dibuja al Esqueleto
+		dibujar_creeper();												//Activamos la funcion que dibuja al Creeper
+		dibujar_arana();												//Activamos la funcion que dibuja al Araña
+		movimiento_zombie_facil();										//Activamos movimiento enemigo
+		movimiento_esqueleto_facil();									//Activamos movimiento enemigo
+		movimiento_creeper_facil();										//Activamos movimiento enemigo
+		movimiento_araña_facil();										//Activamos movimiento enemigo
+		
+		choque_facil();													//Activamos funcion para coque entre enemigo y personaje
+
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
 	al_destroy_sample(ambiente);
-	al_destroy_sample(caminar);
 	return 1;
 }
 
 int jugarmedio()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
+	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/nether.wav");
 	al_reserve_samples(1);
-	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(10);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
@@ -779,75 +1328,37 @@ int jugarmedio()
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_medio()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
-		//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
-		ALLEGRO_EVENT events;
-		al_wait_for_event(event_queue, &events);
-
-		//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
-		antpx = px;
-		antpy = py;
-
-		//ENEMIGOS
-		//Zombie
-		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
-
-		//SONIDO DE CAMINAR
-		if (dir != 4)
-		{
-			//ACTIVAMOS SONIDO DE CAMINAR
-			al_play_sample(caminar, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		}
-
-		//TECLAS DE MOVIMIENTO
-		if (events.type == ALLEGRO_EVENT_KEY_DOWN)
-		{
-			switch (events.keyboard.keycode)
-			{
-			case ALLEGRO_KEY_DOWN:
-				if (medio[(py + 30) / 30][px / 30] != 'X') py += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_UP:
-				if (medio[(py - 30) / 30][px / 30] != 'X') py -= 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				if (medio[py / 30][(px + 30) / 30] != 'X') px += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_LEFT:
-				if (medio[py / 30][(px - 30) / 30] != 'X') px -= 30;
-				else dir = 4;
-				break;
-			}
-		}
-
-		//ATAJOS DEL MAPA
-		if (px <= -30)px = 870;
-		else if (px >= 870)px = -30;
-
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_medio();													//Activamos la funcion que dibuja el Mapa
-		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
+		
+		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
+		mover_personaje_medio();										//Activamos la funcion del movimiento del Personaje
+		
+		dibujar_whither();												//Activamos la funcion que dibuja al Whither
+		dibujar_piglin();												//Activamos la funcion que dibuja al Piglin
+		dibujar_zombiepiglin();											//Activamos la funcion que dibuja al Zombie Piglin
+		dibujar_blaze();												//Activamos la funcion que dibuja al Blaze
+		movimiento_whither_medio();										//Activamos movimiento enemigo
+		movimiento_piglin_medio();										//Activamos movimiento enemigo
+		movimiento_zombiepiglin_medio();								//Activamos movimiento enemigo
+		movimiento_blaze_medio();										//Activamos movimiento enemigo
+
+		choque_medio();													//Activamos funcion para coque entre enemigo y personaje
+
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
 	al_destroy_sample(ambiente);
-	al_destroy_sample(caminar);
 	return 1;
 }
 
 int jugardificil()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
+	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/end.wav");
 	al_reserve_samples(1);
-	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* caminar = al_load_sample("sound/caminar.wav");
-	al_reserve_samples(10);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
 	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
@@ -855,63 +1366,24 @@ int jugardificil()
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_dificil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
-		//EVENTO QUE DETECTARA LA SEÑAL DE LAS TECLAS
-		ALLEGRO_EVENT events;
-		al_wait_for_event(event_queue, &events);
-
-		//GUARDAMOS POSICION ANTERIOR DEL PERSONAJE
-		antpx = px;
-		antpy = py;
-
-		//ENEMIGOS
-		//Zombie
-		zombie A(30 * 1, 30 * 3);										//Creamos enemigo
-
-		//SONIDO DE CAMINAR
-		if (dir != 4)
-		{
-			//ACTIVAMOS SONIDO DE CAMINAR
-			al_play_sample(caminar, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		}
-
-		//TECLAS DE MOVIMIENTO
-		if (events.type == ALLEGRO_EVENT_KEY_DOWN)
-		{
-			switch (events.keyboard.keycode)
-			{
-			case ALLEGRO_KEY_DOWN:
-				if (dificil[(py + 30) / 30][px / 30] != 'X') py += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_UP:
-				if (dificil[(py - 30) / 30][px / 30] != 'X') py -= 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				if (dificil[py / 30][(px + 30) / 30] != 'X') px += 30;
-				else dir = 4;
-				break;
-			case ALLEGRO_KEY_LEFT:
-				if (dificil[py / 30][(px - 30) / 30] != 'X') px -= 30;
-				else dir = 4;
-				break;
-			}
-		}
-
-		//ATAJOS DEL MAPA
-		if (px <= -30)px = 870;
-		else if (px >= 870)px = -30;
-
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_dificil();													//Activamos la funcion que dibuja el Mapa
+		
 		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
-		A.moverzombie();												//Activamos la creacion de un enemigo y movimiento del mismo
+		mover_personaje_dificil();										//Activamos la funcion del movimiento del Personaje
+		
+		dibujar_enderman();												//Activamos la funcion que dibuja al Zombie Piglin
+		dibujar_dragon();												//Activamos la funcion que dibuja al Blaze
+		movimiento_enderman_dificil();									//Activamos movimiento enemigo
+		movimiento_dragon_dificil();									//Activamos movimiento enemigo
+		
+		choque_dificil();												//Activamos funcion para coque entre enemigo y personaje
+
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
 	al_destroy_sample(ambiente);
-	al_destroy_sample(caminar);
 	return 1;
 }
