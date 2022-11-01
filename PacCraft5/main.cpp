@@ -1210,6 +1210,9 @@ void choque_dificil()
 		(
 		((py == eny) && (px == enx)) || ((eny == antpy) && (enx == antpx))
 		|| ((py == dy) && (px == dx)) || ((dy == antpy) && (dx == antpx))
+		|| ((py == eny2) && (px == enx2)) || ((eny2 == antpy) && (enx2 == antpx))
+		|| ((py == eny3) && (px == enx3)) || ((eny3 == antpy) && (enx3 == antpx))
+		|| ((py == eny4) && (px == enx4)) || ((eny4 == antpy) && (enx4 == antpx))
 		)
 	{
 		mapa_dificil();
