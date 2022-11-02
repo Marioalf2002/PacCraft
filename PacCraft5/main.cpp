@@ -519,7 +519,7 @@ void mapa_medio() {
 					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					medio[row][col] = ' ';
+					medio[row][col] = 'N';
 
 				}
 			}
@@ -654,7 +654,7 @@ void movimiento_zombie_facil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (zx <= -30)zx = 870;
@@ -690,7 +690,7 @@ void movimiento_esqueleto_facil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (ex <= -30)ex = 870;
@@ -726,7 +726,7 @@ void movimiento_creeper_facil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (cx <= -30)cx = 870;
@@ -762,7 +762,7 @@ void movimiento_araña_facil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (arx <= -30)arx = 870;
@@ -799,7 +799,7 @@ void movimiento_whither_medio()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (wx <= -30)wx = 870;
@@ -835,7 +835,7 @@ void movimiento_piglin_medio()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (pix <= -30)pix = 870;
@@ -871,7 +871,7 @@ void movimiento_zombiepiglin_medio()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (zpx <= -30)zpx = 870;
@@ -907,7 +907,7 @@ void movimiento_blaze_medio()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (bx <= -30)bx = 870;
@@ -944,6 +944,8 @@ void movimiento_enderman_dificil()
 		break;
 	}
 
+	wdir = rand() % 4;
+
 	switch (wdir)
 	{
 	case 0:
@@ -963,6 +965,8 @@ void movimiento_enderman_dificil()
 		else wdir = rand() % 4;
 		break;
 	}
+
+	wdir = rand() % 4;
 
 	switch (wdir)
 	{
@@ -984,6 +988,8 @@ void movimiento_enderman_dificil()
 		break;
 	}
 
+	wdir = rand() % 4;
+
 	switch (wdir)
 	{
 	case 0:
@@ -1004,7 +1010,7 @@ void movimiento_enderman_dificil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (enx <= -30)enx = 870;
@@ -1046,7 +1052,7 @@ void movimiento_dragon_dificil()
 		break;
 	}
 
-	cout << wdir << endl;
+	//cout << wdir << endl;
 
 	//Atajo
 	if (dx <= -30)dx = 870;
@@ -1182,8 +1188,10 @@ void choque_facil()
 	{
 		mapa_facil();
 		dibujar_steve();
+		
 		px = 30 * 14;
 		py = 30 * 17;
+		cout << "MORISTE, FACIL!\n";
 	}
 }
 
@@ -1201,6 +1209,7 @@ void choque_medio()
 		dibujar_steve();
 		px = 30 * 14;
 		py = 30 * 17;
+		cout << "MORISTE, MEDIO!\n";
 	}
 }
 
@@ -1219,6 +1228,7 @@ void choque_dificil()
 		dibujar_steve();
 		px = 30 * 14;
 		py = 30 * 17;
+		cout << "MORISTE, DIFICIL!\n";
 	}
 }
 
@@ -1231,6 +1241,18 @@ bool game_over_facil()
 		for (col = 0; col < MAXCOL; col++)
 		{
 			if (facil[row][col] == 'o') return true;
+		}
+	}
+
+	for (row = 0; row < MAXFIL; row++)
+	{
+		for (col = 0; col < MAXCOL; col++)
+		{
+			if (facil[row][col] == 'N')
+			{
+				//PINTAMOS MUROS
+				al_draw_bitmap(diamante, col * 30, row * 30, 0);
+			}
 		}
 	}
 
@@ -1258,6 +1280,18 @@ bool game_over_medio()
 	px = 30 * 14;
 	py = 30 * 17;
 
+	for (row = 0; row < MAXFIL; row++)
+	{
+		for (col = 0; col < MAXCOL; col++)
+		{
+			if (medio[row][col] == 'N')
+			{
+				//PINTAMOS MUROS
+				al_draw_bitmap(netherite, col * 30, row * 30, 0);
+			}
+		}
+	}
+
 	return false;
 }
 
@@ -1276,6 +1310,18 @@ bool game_over_dificil()
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
+	
+	for (row = 0; row < MAXFIL; row++)
+	{
+		for (col = 0; col < MAXCOL; col++)
+		{
+			if (dificil[row][col] == 'N')
+			{
+				//PINTAMOS MUROS
+				al_draw_bitmap(enderperl, col * 30, row * 30, 0);
+			}
+		}
+	}
 
 	return false;
 }
