@@ -9,7 +9,7 @@ Se cuenta con 2 interfaces de usuario distintas empezando por la de inicio princ
 Contamos con sonidos a la hora de agarrar los items, se cuenta con un codigo modificable por si quieres que cada vez que te maten todo lo que hayas recogido vuelva aparecer.
 
 <p align="center" style="font-size: 2rem;">Menú Inicial</p>
-<p align="left"><img src="PacCraft5/info/inicio.png"></p>
+<p align="left"><img src="PacCraft5/info/Inicio.png"></p>
 
 <p align="center" style="font-size: 2rem;">Menú Dificultades</p>
 <p align="left"><img src="PacCraft5/info/niveles.png"></p>
