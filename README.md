@@ -20,7 +20,7 @@ Contamos con 3 mapas diferentes Fácil, Medio y Difícil, cada mapa cuenta con m
 
 # Enemigos del Mapa Fácil
 En el Mapa Fácil contamos con 4 enemigos diferentes siendo Zombi, Esqueleto, Creeper y Araña.
-<hr>
+
 <p align="center"><img src="PacCraft5/info/enemigos_facil.png"></p>
 
 # Mapa Medio
@@ -28,7 +28,7 @@ En el Mapa Fácil contamos con 4 enemigos diferentes siendo Zombi, Esqueleto, Cr
 
 # Enemigos del Mapa Medio
 En el Mapa Medio contamos con 4 enemigos diferentes siendo Piglin, Zombi Piglin, Esqueleto Whiter y Blaze.
-<hr>
+
 <p align="center"><img src="PacCraft5/info/enemigos_medio.png"></p>
 
 # Mapa Difícil
@@ -36,5 +36,5 @@ En el Mapa Medio contamos con 4 enemigos diferentes siendo Piglin, Zombi Piglin,
 
 # Enemigos del Mapa Difícil
 En el Mapa Difícil contamos con 2 enemigos diferentes siendo Enderman y Ender Dragón, en este caso el Enderman está 4 veces y el Ender Dragón 1 sola vez siendo así 5 enemigos en el mapa.
-<hr>
+
 <p align="center"><img src="PacCraft5/info/enemigos_dificil.png"></p>
