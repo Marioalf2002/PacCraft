@@ -12,9 +12,8 @@ Contamos con sonidos a la hora de agarrar los items, se cuenta con un codigo mod
 <p align="center"><img src="PacCraft5/info/Inicio.png"></p>
 
 # Menú Dificultades
-<p align="center"><img src="PacCraft5/info/niveles.png"></p>
-
 Contamos con 3 mapas diferentes Fácil, Medio y Difícil, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
+<p align="center"><img src="PacCraft5/info/niveles.png"></p>
 
 # Mapa Fácil
 <p align="center"><img src="PacCraft5/info/facil.png"></p>
