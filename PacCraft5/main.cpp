@@ -57,6 +57,7 @@ ALLEGRO_BITMAP* modos;												//Variable que contiene imagen Menu Dificultad
 ALLEGRO_BITMAP* modo_facil;											//Variable que contiene imagen Menu Dificultades Facil
 ALLEGRO_BITMAP* modo_medio;											//Variable que contiene imagen Menu Dificultades Medio
 ALLEGRO_BITMAP* modo_dificil;										//Variable que contiene imagen Menu Dificultades Dificil
+
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
 ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
 
@@ -92,7 +93,7 @@ ALLEGRO_BITMAP* dragon;												//Imagen del Dragon
 
 int px = 30 * 14, py = 30 * 17;										//Posicion del Personaje
 int antpx, antpy;													//Posicion anterior del Personaje
-
+int row, col;
 int zy = 30 * 1, zx = 30 * 1;										//Posicion del Zombie
 int ey = 30 * 10, ex = 30 * 5;										//Posicion del Esqueleto
 int cy = 30 * 1, cx = 30 * 25;										//Posicion del Creeper
@@ -210,6 +211,11 @@ int main()
 	//VENTANA
 	ventana = al_create_display(900, 600);
 
+	//MENUS INICIAL
+	menu_null = al_load_bitmap("menu/menu.png");
+	menu_play = al_load_bitmap("menu/play.png");
+	menu_salir = al_load_bitmap("menu/salir.png");
+
 	//TEXTURA MUROS
 	roca = al_load_bitmap("img/roca.png");
 	netherrack = al_load_bitmap("img/netherrack.png");
@@ -251,7 +257,7 @@ int main()
 
 	//DAMOS NOMBRE A LA VENTANA Y POSICION
 	al_set_window_title(ventana, "PacCraft");
-	al_set_window_position(ventana, ((ANCHO / 2) - (800 / 2)), ((ALTO / 2) - (600 / 2)));
+	al_set_window_position(ventana, ((ANCHO / 2) - (900 / 2)), ((ALTO / 2) - (600 / 2)));
 
 	//CREAMOS DECTOR DE EVENTOS
 	event_queue = al_create_event_queue();
@@ -260,11 +266,6 @@ int main()
 	//REGISTRO DE EVENTOS
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue_teclado, al_get_keyboard_event_source());
-
-	//MENUS INICIAL
-	menu_null = al_load_bitmap("menu/menu.png");
-	menu_play = al_load_bitmap("menu/play.png");
-	menu_salir = al_load_bitmap("menu/salir.png");
 
 	//VARIABLES QUE CONTENDRAN POSICION DE MOUSE Y CLICKS
 	int x = -1, y = -1;
@@ -451,7 +452,6 @@ int dificultad()
 
 //DIBUJADO DE MAPA FACIL
 void mapa_facil() {
-	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
@@ -480,7 +480,7 @@ void mapa_facil() {
 					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					facil[row][col] = ' ';
+					facil[row][col] = 'N';
 
 				}
 			}
@@ -490,7 +490,6 @@ void mapa_facil() {
 
 //DIBUJO DE MAPA MEDIO
 void mapa_medio() {
-	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
@@ -529,7 +528,6 @@ void mapa_medio() {
 
 //DIBUJO DE MAPA DIFICIL
 void mapa_dificil() {
-	int row, col;
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
 	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
@@ -558,7 +556,7 @@ void mapa_dificil() {
 					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
-					dificil[row][col] = ' ';
+					dificil[row][col] = 'N';
 
 				}
 			}
@@ -1077,7 +1075,6 @@ void mover_personaje_facil()
 	antpy = py;
 
 	//TECLAS DE MOVIMIENTO
-
 	if (events.type == ALLEGRO_EVENT_KEY_DOWN)
 	{
 		if (events.keyboard.keycode == ALLEGRO_KEY_A || events.keyboard.keycode == ALLEGRO_KEY_LEFT)
@@ -1187,11 +1184,25 @@ void choque_facil()
 		)
 	{
 		mapa_facil();
+
+		//CICLO QUE PINTA LA COMIDA QUE YA SE HAYA AGARRADO ANTES DE SER ELIMINADO
+		/*
+		for (row = 0; row < MAXFIL; row++)
+		{
+			for (col = 0; col < MAXCOL; col++)
+			{
+				if (facil[row][col] == 'N')
+				{
+					facil[row][col] = 'o';
+				}
+			}
+		}
+		*/
 		dibujar_steve();
 		
 		px = 30 * 14;
 		py = 30 * 17;
-		cout << "MORISTE, FACIL!\n";
+		cout << "TE MATE EN EL MAPA FACIL!\n";
 	}
 }
 
@@ -1206,15 +1217,30 @@ void choque_medio()
 		)
 	{
 		mapa_medio();
+
+		//CICLO QUE PINTA LA COMIDA QUE YA SE HAYA AGARRADO ANTES DE SER ELIMINADO
+		/*
+		for (row = 0; row < MAXFIL; row++)
+		{
+			for (col = 0; col < MAXCOL; col++)
+			{
+				if (medio[row][col] == 'N')
+				{
+					medio[row][col] = 'o';
+				}
+			}
+		}
+		*/
 		dibujar_steve();
 		px = 30 * 14;
 		py = 30 * 17;
-		cout << "MORISTE, MEDIO!\n";
+		cout << "TE MATE EN EL MAPA MEDIO!\n";
 	}
 }
 
 void choque_dificil()
 {
+	
 	if 
 		(
 		((py == eny) && (px == enx)) || ((eny == antpy) && (enx == antpx))
@@ -1225,10 +1251,25 @@ void choque_dificil()
 		)
 	{
 		mapa_dificil();
+
+		//CICLO QUE PINTA LA COMIDA QUE YA SE HAYA AGARRADO ANTES DE SER ELIMINADO
+		/*
+		for (row = 0; row < MAXFIL; row++)
+		{
+			for (col = 0; col < MAXCOL; col++)
+			{
+				if (dificil[row][col] == 'N')
+				{
+					dificil[row][col] = 'o';
+				}
+			}
+		}
+		*/
 		dibujar_steve();
+		
 		px = 30 * 14;
 		py = 30 * 17;
-		cout << "MORISTE, DIFICIL!\n";
+		cout << "TE MATE EN EL MAPA DIFICIL!\n";
 	}
 }
 
@@ -1244,19 +1285,19 @@ bool game_over_facil()
 		}
 	}
 
+	mapa_facil();
+	/*
 	for (row = 0; row < MAXFIL; row++)
 	{
 		for (col = 0; col < MAXCOL; col++)
 		{
 			if (facil[row][col] == 'N')
 			{
-				//PINTAMOS MUROS
-				al_draw_bitmap(diamante, col * 30, row * 30, 0);
+				facil[row][col] = 'o';
 			}
 		}
 	}
-
-	mapa_facil();
+	*/
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
@@ -1276,21 +1317,21 @@ bool game_over_medio()
 	}
 
 	mapa_medio();
-	dibujar_steve();
-	px = 30 * 14;
-	py = 30 * 17;
-
+	/*
 	for (row = 0; row < MAXFIL; row++)
 	{
 		for (col = 0; col < MAXCOL; col++)
 		{
 			if (medio[row][col] == 'N')
 			{
-				//PINTAMOS MUROS
-				al_draw_bitmap(netherite, col * 30, row * 30, 0);
+				medio[row][col] = 'o';
 			}
 		}
 	}
+	*/
+	dibujar_steve();
+	px = 30 * 14;
+	py = 30 * 17;
 
 	return false;
 }
@@ -1307,21 +1348,21 @@ bool game_over_dificil()
 	}
 
 	mapa_dificil();
-	dibujar_steve();
-	px = 30 * 14;
-	py = 30 * 17;
-	
+	/*
 	for (row = 0; row < MAXFIL; row++)
 	{
 		for (col = 0; col < MAXCOL; col++)
 		{
 			if (dificil[row][col] == 'N')
 			{
-				//PINTAMOS MUROS
-				al_draw_bitmap(enderperl, col * 30, row * 30, 0);
+				dificil[row][col] = 'o';
 			}
 		}
 	}
+	*/
+	dibujar_steve();
+	px = 30 * 14;
+	py = 30 * 17;
 
 	return false;
 }
