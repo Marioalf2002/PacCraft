@@ -1,4 +1,4 @@
-<p align="left"><img src="PacCraft5/info/paccraft.png" alt="paccraft" height="120px"></p>
+<p align="center"><img src="PacCraft5/info/paccraft.png" alt="paccraft" height="120px"></p>
 
 <p align="center" style="font-size: 2rem;">Información</p>
 
