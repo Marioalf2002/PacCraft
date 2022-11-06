@@ -1,34 +1,41 @@
-<p align="center"><img src="info/paccraft.png" alt="paccraft" height="120px"></p>
+<p align="left"><img src="PacCraft5/info/paccraft.png" alt="paccraft" height="120px"></p>
 
-# Juego PacCraft5
+<p align="center" style="font-size: 2rem;">Información</p>
 
-## Información
 El juego fue creado, usando el lenguaje C++ y la Librería de Allegro 5 para implementar texturas, sonidos, entre otras funciones, es un juego creado bajo la lógica del juego PacMan usando diferentes texturas al estilo Minecraft.
 
 Se cuenta con 2 interfaces de usuario distintas empezando por la de inicio principal, teniendo música de fondo y la siguiente un menú para elegir la dificultad que desea elegir igualmente cuenta con música de fondo.
 
-## Menu Inicial
-<p align="left"><img src="info/inicio.png"></p>
+Contamos con sonidos a la hora de agarrar los items, se cuenta con un codigo modificable por si quieres que cada vez que te maten todo lo que hayas recogido vuelva aparecer.
 
-## Menu Dificultades
-<p align="left"><img src="info/niveles.png"></p>
+<p align="center" style="font-size: 2rem;">Menú Inicial</p>
+<p align="left"><img src="PacCraft5/info/inicio.png"></p>
+
+<p align="center" style="font-size: 2rem;">Menú Dificultades</p>
+<p align="left"><img src="PacCraft5/info/niveles.png"></p>
 
 Contamos con 3 mapas diferentes Fácil, Medio y Difícil, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
 
-## Mapa Facil
-<p align="left"><img src="info/facil.png"></p>
+<p align="center" style="font-size: 2rem;">Mapa Fácil</p>
+<p align="left"><img src="PacCraft5/info/facil.png"></p>
 
-## Enemigos del Mapa Facil
-<p align="left"><img src="info/enemigos_facil.png"></p>
+<p align="center" style="font-size: 2rem;">Enemigos del Mapa Fácil</p>
+En el Mapa Fácil contamos con 4 enemigos diferentes siendo Zombi, Esqueleto, Creeper y Araña.
+<hr>
+<p align="left"><img src="PacCraft5/info/enemigos_facil.png"></p>
 
-## Mapa Medio
-<p align="left"><img src="info/medio.png"></p>
+<p align="center" style="font-size: 2rem;">Mapa Medio</p>
+<p align="left"><img src="PacCraft5/info/medio.png"></p>
 
-## Enemigos del Mapa Medio
-<p align="left"><img src="info/enemigos_medio.png"></p>
+<p align="center" style="font-size: 2rem;">Enemigos del Mapa Medio</p>
+En el Mapa Medio contamos con 4 enemigos diferentes siendo Piglin, Zombi Piglin, Esqueleto Whiter y Blaze.
+<hr>
+<p align="left"><img src="PacCraft5/info/enemigos_medio.png"></p>
 
-## Mapa Dificil
-<p align="left"><img src="info/dificil.png"></p>
+<p align="center" style="font-size: 2rem;">Mapa Difícil</p>
+<p align="left"><img src="PacCraft5/info/dificil.png"></p>
 
-## Enemigos del Mapa Dicil
-<p align="left"><img src="info/enemigos_dificil.png"></p>
+<p align="center" style="font-size: 2rem;">Enemigos del Mapa Difícil</p>
+En el Mapa Difícil contamos con 2 enemigos diferentes siendo Enderman y Ender Dragón, en este caso el Enderman está 4 veces y el Ender Dragón 1 sola vez siendo así 5 enemigos en el mapa.
+<hr>
+<p align="left"><img src="PacCraft5/info/enemigos_dificil.png"></p>
