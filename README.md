@@ -1,6 +1,6 @@
 <p align="center"><img src="PacCraft5/info/paccraft.png" alt="paccraft" height="120px"></p>
 
-##Información
+# Información
 
 El juego fue creado, usando el lenguaje C++ y la Librería de Allegro 5 para implementar texturas, sonidos, entre otras funciones, es un juego creado bajo la lógica del juego PacMan usando diferentes texturas al estilo Minecraft.
 
@@ -8,34 +8,34 @@ Se cuenta con 2 interfaces de usuario distintas empezando por la de inicio princ
 
 Contamos con sonidos a la hora de agarrar los items, se cuenta con un codigo modificable por si quieres que cada vez que te maten todo lo que hayas recogido vuelva aparecer.
 
-##Menú Inicial
+# Menú Inicial
 <p align="center"><img src="PacCraft5/info/Inicio.png"></p>
 
-##Menú Dificultades
+# Menú Dificultades
 <p align="center"><img src="PacCraft5/info/niveles.png"></p>
 
 Contamos con 3 mapas diferentes Fácil, Medio y Difícil, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
 
-##Mapa Fácil
+# Mapa Fácil
 <p align="center"><img src="PacCraft5/info/facil.png"></p>
 
-##Enemigos del Mapa Fácil
+# Enemigos del Mapa Fácil
 En el Mapa Fácil contamos con 4 enemigos diferentes siendo Zombi, Esqueleto, Creeper y Araña.
 <hr>
 <p align="center"><img src="PacCraft5/info/enemigos_facil.png"></p>
 
-##Mapa Medio
+# Mapa Medio
 <p align="center"><img src="PacCraft5/info/medio.png"></p>
 
-##Enemigos del Mapa Medio
+# Enemigos del Mapa Medio
 En el Mapa Medio contamos con 4 enemigos diferentes siendo Piglin, Zombi Piglin, Esqueleto Whiter y Blaze.
 <hr>
 <p align="center"><img src="PacCraft5/info/enemigos_medio.png"></p>
 
-##Mapa Difícil
+# Mapa Difícil
 <p align="center"><img src="PacCraft5/info/dificil.png"></p>
 
-##Enemigos del Mapa Difícil
+# Enemigos del Mapa Difícil
 En el Mapa Difícil contamos con 2 enemigos diferentes siendo Enderman y Ender Dragón, en este caso el Enderman está 4 veces y el Ender Dragón 1 sola vez siendo así 5 enemigos en el mapa.
 <hr>
 <p align="center"><img src="PacCraft5/info/enemigos_dificil.png"></p>
