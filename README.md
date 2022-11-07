@@ -4,9 +4,9 @@
 
 El juego fue creado, usando el <b>lenguaje C++</b> y la Librería de <b>Allegro 5</b> para implementar texturas, sonidos, entre otras funciones, es un juego creado bajo la lógica del juego <b>PacMan</b> usando diferentes texturas al estilo <b>Minecraft</b>.
 
-Se cuenta con 2 interfaces de usuario distintas empezando por la de <b>Inicio</b> principal, teniendo <b>Música</b> de fondo y la siguiente un <b>Menú</b> para elegir la <b>Dificultad</b> que desea elegir igualmente cuenta con <b>Música</b> de fondo.
+Se cuenta con 2 interfaces de usuario distintas empezando por la de <b>Inicio</b> principal, teniendo <b>Música</b> de fondo y la siguiente un <b>Menú</b> para elegir la <b>Dificultad</b>, igualmente cuenta con <b>Música</b> de fondo.
 
-Contamos con <b>Sonidos</b> a la hora de agarrar los <b>Items</b>, se cuenta con un <b>Codigo Modificable</b> por si quieres que en cada mapa cada que te <b>Maten</b> todo lo que hayas <b>Recogido</b> vuelva <b>Aparecer</b>, esta funcion viene activada por defecto en el <b>Mapa Hard</b>.
+Contamos con <b>Sonidos</b> a la hora de agarrar los <b>Items</b>, se cuenta con un <b>Codigo Modificable</b> por si quieres que en cada mapa cuando te <b>Maten</b> todo lo que hayas <b>Recogido</b> vuelva <b>Aparecer</b>, esta funcion viene activada por defecto en el <b>Mapa Hard</b>.
 
 # Menú Inicial
 <p align="center"><img src="PacCraft5/menu/menu.png"></p>
