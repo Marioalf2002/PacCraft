@@ -67,5 +67,4 @@ En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, 
 
 El Proyecto del juego fue creado en <b>Visual Studio 2022</b>, en caso de querer usarlo o modificarlo a gusto, se le recomienda trabajarlo sobre Visual Studio 2022 <b>previniendo</b> así problemas de <b>compatibilidad</b>.
 
-# Copyright (c) 2022 Mario Hernandez
-[Perfil GitHub](https://github.com/Marioalf2002)
+## Copyright (c) 2022 Mario Hernandez [Perfil GitHub](https://github.com/Marioalf2002)
