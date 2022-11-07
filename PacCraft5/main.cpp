@@ -112,7 +112,7 @@ int eny2 = 30 * 10, enx2 = 30 * 5;									//Posicion del Enderman 2
 int eny3 = 30 * 1, enx3 = 30 * 25;									//Posicion del Enderman 3
 int eny4 = 30 * 9, enx4 = 30 * 25;									//Posicion del Enderman 4
 int dy = 30 * 9, dx = 30 * 14;										//Posicion del Dragon
-int hx = 30 * 16, hy = 30 * 17;										//Posicion de Herobrine
+int hx = 30 * 15, hy = 30 * 10;										//Posicion de Herobrine
 
 int jugarfacil();													//Inicio de Funcion de Juego Facil
 int jugarmedio();													//Inicio de Funcion de Juego Medio
@@ -1970,7 +1970,6 @@ int jugarhard()
 		dibujar_blaze();												//Activamos la funcion que dibuja al Blaze
 		dibujar_enderman_hard();										//Activamos la funcion que dibuja al Enderman
 		dibujar_herobrine();											//Activamos la funcion que dibuja a Herobrine
-		
 		movimiento_enemigos_hard();										//Activamos movimiento enemigo
 		
 		choque_hard();													//Activamos funcion para coque entre enemigo y personaje
@@ -1979,6 +1978,6 @@ int jugarhard()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	al_destroy_sample(ambiente); 
 	return 1;
 }
