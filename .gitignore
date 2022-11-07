@@ -361,5 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/PacCraft5/sound/end.wav
-/PacCraft5/sound/nether.wav
