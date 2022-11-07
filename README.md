@@ -54,11 +54,11 @@ En el Mapa Difícil contamos con 2 enemigos diferentes siendo <b>Enderman</b> y 
 
 El Mapa Hard tiene la <b>Particularidad</b> de que a la hora de <b>Ser Golpeado/Matado</b> por un enemigo, todas las <b>Manzanas</b> que hayas agarrado <b>Volverán a Aparecer</b>... Así que será mejor que tengas mucho cuidado si quieres ganar...
 
-Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no qurras encontrarte <b>Encerrado</b>, recuerda que tienes <b>10</b> enemigos que evadir...
+Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no querras encontrarte <b>Encerrado</b>, recuerda que tienes <b>10</b> enemigos que evadir...
 
 <p align="center"><img src="PacCraft5/info/hard.png"></p>
 
-# Enemigos del Mapa Difícil
+# Enemigos del Mapa Hard
 En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por la mayor pesadilla de Minecraft... <b>Herobrine</b>.
 
 <p align="center"><img src="PacCraft5/info/herobrine.png"></p>
