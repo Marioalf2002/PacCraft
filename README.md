@@ -62,3 +62,7 @@ Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no queras encontrarte <b>Ence
 En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por <b>Herobrine</b>.
 
 <p align="center"><img src="PacCraft5/info/herobrine.png"></p>
+
+# Nota Importante
+
+El Proyecto del juego fue creado en <b>Visual Studio 2022</b>, en caso de querer usarlo o modificarlo a gusto, se le recomienda trabajarlo sobre Visual Studio 2022 <b>previniendo</b> asi problemas de <b>compatibilidad</b>.
