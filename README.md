@@ -59,7 +59,7 @@ Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no qurras encontrarte <b>Ence
 <p align="center"><img src="PacCraft5/info/hard.png"></p>
 
 # Enemigos del Mapa Difícil
-En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por la mayor pesadilla de Minecraft <b>Herobrine</b>.
+En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por la mayor pesadilla de Minecraft... <b>Herobrine</b>.
 
 <p align="center"><img src="PacCraft5/info/herobrine.png"></p>
 
