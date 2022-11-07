@@ -6,13 +6,13 @@ El juego fue creado, usando el <b>lenguaje C++</b> y la Librería de <b>Allegro 
 
 Se cuenta con 2 interfaces de usuario distintas empezando por la de <b>Inicio</b> principal, teniendo <b>Música</b> de fondo y la siguiente un <b>Menú</b> para elegir la <b>Dificultad</b>, igualmente cuenta con <b>Música</b> de fondo.
 
-Contamos con <b>Sonidos</b> a la hora de agarrar los <b>Items</b>, se cuenta con un <b>Codigo Modificable</b> por si quieres que en cada mapa cuando te <b>Maten</b> todo lo que hayas <b>Recogido</b> vuelva <b>Aparecer</b>, esta funcion viene activada por defecto en el <b>Mapa Hard</b>.
+Contamos con <b>Sonidos</b> a la hora de agarrar los <b>Items</b>, se cuenta con un <b>Codigo Modificable</b> por si quieres que en cada mapa cuando te <b>Maten</b> todo lo que hayas <b>Recogido</b> vuelva a <b>Aparecer</b>, esta funcion viene activada por defecto en el <b>Mapa Hard</b>.
 
 # Menú Inicial
 <p align="center"><img src="PacCraft5/menu/menu.png"></p>
 
 # Menú Dificultades
-Contamos con 4 mapas diferentes <b>Fácil</b>, <b>Medio</b> y <b>Difícil</b> y <b>Hard</b>, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
+Contamos con 4 mapas diferentes <b>Fácil</b>, <b>Medio</b>, <b>Difícil</b> y <b>Hard</b>, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
 <p align="center"><img src="PacCraft5/menu/modo.png"></p>
 
 # Mapa Fácil
@@ -30,7 +30,7 @@ En el Mapa Fácil contamos con 4 enemigos diferentes siendo <b>Zombi</b>, <b>Esq
 # Mapa Medio
 <b>Comida:</b> Netherite.
 
-Ten cuidado al andar, <b>Concéntrate</b> en cada <b>Movimiento</b> que hagas... no queras encontrarte encerrado.
+Ten cuidado al andar, <b>Concéntrate</b> en cada <b>Movimiento</b> que hagas... No querrás encontrarte sin salida
 <p align="center"><img src="PacCraft5/info/medio.png"></p>
 
 # Enemigos del Mapa Medio
@@ -52,14 +52,14 @@ En el Mapa Difícil contamos con 2 enemigos diferentes siendo <b>Enderman</b> y 
 # Mapa Hard
 <b>Comida:</b> Manzanas Doradas.
 
-El Mapa Hard tiene la <b>Particularidad</b> de que a la hora de <b>Ser Golpeado/Matado</b> por un enemigo, todas las <b>Manzanas</b> que hayas agarrado <b>Volverán Aparecer</b>... Así que será mejor que tengas mucho cuidado si quieres ganar...
+El Mapa Hard tiene la <b>Particularidad</b> de que a la hora de <b>Ser Golpeado/Matado</b> por un enemigo, todas las <b>Manzanas</b> que hayas agarrado <b>Volverán a Aparecer</b>... Así que será mejor que tengas mucho cuidado si quieres ganar...
 
-Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no queras encontrarte <b>Encerrado</b>, recuerda que tienes <b>10</b> enemigos que evadir...
+Asegúrate de <b>Planear</b> una buena <b>Ruta</b> no qurras encontrarte <b>Encerrado</b>, recuerda que tienes <b>10</b> enemigos que evadir...
 
 <p align="center"><img src="PacCraft5/info/hard.png"></p>
 
 # Enemigos del Mapa Difícil
-En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por <b>Herobrine</b>.
+En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, menos con el dragón siendo reemplazado por la mayor pesadilla de Minecraft <b>Herobrine</b>.
 
 <p align="center"><img src="PacCraft5/info/herobrine.png"></p>
 
