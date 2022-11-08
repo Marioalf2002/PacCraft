@@ -26,7 +26,8 @@ Aunque sea el <b>Mapa Fácil</b> ten cuidado los enemigos pueden ser algo <b>Ter
 En el Mapa Fácil contamos con 4 enemigos diferentes siendo <b>Zombi</b>, <b>Esqueleto</b>, <b>Creeper</b> y <b>Araña</b>.
 <br>
 <p align="center"><img src="PacCraft5/info/enemigos_facil.png"></p>
-<br>
+<br> 
+
 # Mapa Medio
 <b>Comida:</b> Netherite.
 
@@ -38,6 +39,7 @@ En el Mapa Medio contamos con 4 enemigos diferentes siendo <b>Piglin</b>, <b>Zom
 <br>
 <p align="center"><img src="PacCraft5/info/enemigos_medio.png"></p>
 <br>
+
 # Mapa Difícil
 <b>Comida:</b> Ender Perls.
 
@@ -49,6 +51,7 @@ En el Mapa Difícil contamos con 2 enemigos diferentes siendo <b>Enderman</b> y 
 <br>
 <p align="center"><img src="PacCraft5/info/enemigos_dificil.png"></p>
 <br>
+
 # Mapa Hard
 <b>Comida:</b> Manzanas Doradas.
 
