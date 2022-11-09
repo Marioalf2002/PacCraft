@@ -13,7 +13,7 @@ Se cuanta con dos diferentes opciones siendo la primera la de <b>Inicio</b>, est
 <p align="center"><img src="PacCraft5/menu/menu.png"></p>
 
 # Menú Dificultades
-Contamos con 4 mapas diferentes <b>Fácil</b>, <b>Medio</b>, <b>Difícil</b> y <b>Hard</b>, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
+Contamos con 4 mapas diferentes <b>Fácil</b>, <b>Medio</b>, <b>Difícultoso</b> y <b>Hard</b>, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
 <p align="center"><img src="PacCraft5/menu/modo.png"></p>
 
 # Mapa Fácil
@@ -40,14 +40,14 @@ En el Mapa Medio contamos con 4 enemigos diferentes siendo <b>Piglin</b>, <b>Zom
 <p align="center"><img src="PacCraft5/info/enemigos_medio.png"></p>
 <br>
 
-# Mapa Difícil
+# Mapa Difícultoso
 <b>Comida:</b> Ender Perls.
 
 No te confíes por que veas que tienes mucho <b>Espacio</b> para andar... No todo lo que se ve fácil puede serlo…
 <p align="center"><img src="PacCraft5/info/dificil.png"></p>
 
-# Enemigos del Mapa Difícil
-En el Mapa Difícil contamos con 2 enemigos diferentes siendo <b>Enderman</b> y <b>Ender Dragón</b>, en este caso el Enderman está 4 veces y el Ender Dragón 1 sola vez siendo así 5 enemigos en el mapa.
+# Enemigos del Mapa Difícultoso
+En el Mapa Difícultoso contamos con 2 enemigos diferentes siendo <b>Enderman</b> y <b>Ender Dragón</b>, en este caso el Enderman está 4 veces y el Ender Dragón 1 sola vez siendo así 5 enemigos en el mapa.
 <br>
 <p align="center"><img src="PacCraft5/info/enemigos_dificil.png"></p>
 <br>
