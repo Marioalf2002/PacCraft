@@ -57,7 +57,7 @@ ALLEGRO_BITMAP* modos;												//Variable que contiene imagen Menu Dificultad
 ALLEGRO_BITMAP* modo_facil;											//Variable que contiene imagen Menu Dificultades Facil
 ALLEGRO_BITMAP* modo_medio;											//Variable que contiene imagen Menu Dificultades Medio
 ALLEGRO_BITMAP* modo_dificil;										//Variable que contiene imagen Menu Dificultades Dificil
-ALLEGRO_BITMAP* modo_hard;										//Variable que contiene imagen Menu Dificultades Hard
+ALLEGRO_BITMAP* modo_hard;											//Variable que contiene imagen Menu Dificultades Hard
 
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
 ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
@@ -65,7 +65,7 @@ ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
 ALLEGRO_BITMAP* netherrack;											//Variable que contiene Textura Netherrack
 ALLEGRO_BITMAP* endstone;											//Variable que contiene Textura End Stone
-ALLEGRO_BITMAP* fin;											//Variable que contiene Textura Fin
+ALLEGRO_BITMAP* fin;												//Variable que contiene Textura Fin
 
 ALLEGRO_BITMAP* diamante;											//Variable que contiene Textura Diamante
 ALLEGRO_BITMAP* netherite;											//Variable que contiene Textura Netherite
@@ -102,12 +102,12 @@ int row, col;
 int zy = 30 * 2, zx = 30 * 1;										//Posicion del Zombie
 int ey = 30 * 10, ex = 30 * 5;										//Posicion del Esqueleto
 int cy = 30 * 1, cx = 30 * 25;										//Posicion del Creeper
-int ary = 30 * 9, arx = 30 * 25;									//Posicion del Araña
-int wy = 30 * 2, wx = 30 * 1;										//Posicion del Whither
+int ary = 30 * 10, arx = 30 * 25;									//Posicion del Araña
+int wy = 30 * 15, wx = 30 * 1;										//Posicion del Whither
 int zpy = 30 * 10, zpx = 30 * 5;									//Posicion del Zombie Piglin
 int piy = 30 * 1, pix = 30 * 25;									//Posicion del Piglin
-int by = 30 * 9, bx = 30 * 25;										//Posicion del Blaze
-int eny = 30 * 2, enx = 30 * 1;										//Posicion del Enderman
+int by = 30 * 11, bx = 30 * 25;										//Posicion del Blaze
+int eny = 30 * 14, enx = 30 * 25;									//Posicion del Enderman
 int eny2 = 30 * 10, enx2 = 30 * 5;									//Posicion del Enderman 2
 int eny3 = 30 * 1, enx3 = 30 * 25;									//Posicion del Enderman 3
 int eny4 = 30 * 9, enx4 = 30 * 25;									//Posicion del Enderman 4
@@ -202,8 +202,8 @@ char hard[MAXFIL][MAXCOL] = {
 		"X oXXoooXo  XXooXX  oXoooXXo X",
 		"X XXXXXXXXX  XooX  XXXXXXXXX X",
 		" |oXXXoXoooXoXooXoXoooXoXXXo| ",
-		"X      X XXX XooX XXX X      X",
-		"XoXoXoXX XXX XXXX XXX XXoXoXoX",
+		"X      XoXXX XooX XXXoX      X",
+		"XoXoXoXXoXXX XXXX XXXoXXoXoXoX",
 		"XoXoXoX      oooo      XoXoXoX",
 		"XoXoXoX XXX  XXXX  XXX XoXoXoX",
 		"XXXoXX   XooooXXooooX   XXoXXX",
@@ -722,7 +722,7 @@ void dibujar_herobrine()
 	al_draw_bitmap(herobrine, hx, hy, 0);
 }
 
-//ENEMIGOS
+//MOVIMIENTO ENEMIGOS
 //FACIL
 void movimiento_zombie_facil()
 {
@@ -1701,6 +1701,8 @@ void choque_hard()
 
 		px = 30 * 14;
 		py = 30 * 17;
+
+		cout << "TE MATE EN EL MAPA HARD!\n";
 	}
 }
 
@@ -1716,19 +1718,7 @@ bool game_over_facil()
 		}
 	}
 
-	mapa_facil();
-	
-	for (row = 0; row < MAXFIL; row++)
-	{
-		for (col = 0; col < MAXCOL; col++)
-		{
-			if (facil[row][col] == 'N')
-			{
-				facil[row][col] = 'o';
-			}
-		}
-	}
-	
+	mapa_facil();	
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
@@ -1748,18 +1738,6 @@ bool game_over_medio()
 	}
 
 	mapa_medio();
-	
-	for (row = 0; row < MAXFIL; row++)
-	{
-		for (col = 0; col < MAXCOL; col++)
-		{
-			if (medio[row][col] == 'N')
-			{
-				medio[row][col] = 'o';
-			}
-		}
-	}
-	
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
@@ -1779,18 +1757,6 @@ bool game_over_dificil()
 	}
 
 	mapa_dificil();
-	
-	for (row = 0; row < MAXFIL; row++)
-	{
-		for (col = 0; col < MAXCOL; col++)
-		{
-			if (dificil[row][col] == 'N')
-			{
-				dificil[row][col] = 'o';
-			}
-		}
-	}
-	
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
@@ -1810,18 +1776,6 @@ bool game_over_hard()
 	}
 
 	mapa_hard();
-
-	for (row = 0; row < MAXFIL; row++)
-	{
-		for (col = 0; col < MAXCOL; col++)
-		{
-			if (hard[row][col] == 'N')
-			{
-				hard[row][col] = 'o';
-			}
-		}
-	}
-
 	dibujar_steve();
 	px = 30 * 14;
 	py = 30 * 17;
@@ -1833,16 +1787,16 @@ bool game_over_hard()
 int jugarfacil()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
+	ALLEGRO_SAMPLE* ambiente_facil = al_load_sample("sound/ambiente.wav");
 	al_reserve_samples(1);
 	
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	al_play_sample(ambiente_facil, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 	
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over_facil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{		
-		al_clear_to_color(al_map_rgb(0, 0, 0));		
+		//al_clear_to_color(al_map_rgb(0, 0, 0));		
 		
 		mapa_facil();													//Activamos la funcion que dibuja el Mapa
 
@@ -1864,18 +1818,18 @@ int jugarfacil()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	al_destroy_sample(ambiente_facil);
 	return 1;
 }
 
 int jugarmedio()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/nether.wav");
-	al_reserve_samples(1);
+	ALLEGRO_SAMPLE* ambiente_medio = al_load_sample("sound/nether.wav");
+	al_reserve_samples(2);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	al_play_sample(ambiente_medio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_medio()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
@@ -1902,18 +1856,18 @@ int jugarmedio()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	al_destroy_sample(ambiente_medio);
 	return 1;
 }
 
 int jugardificil()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/end.wav");
-	al_reserve_samples(1);
+	ALLEGRO_SAMPLE* ambiente_dificil = al_load_sample("sound/end.wav");
+	al_reserve_samples(3);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	al_play_sample(ambiente_dificil, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_dificil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
@@ -1936,18 +1890,18 @@ int jugardificil()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	al_destroy_sample(ambiente_dificil);
 	return 1;
 }
 
 int jugarhard()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/hard.wav");
-	al_reserve_samples(1);
+	ALLEGRO_SAMPLE* ambiente_dificil = al_load_sample("sound/hard.wav");
+	al_reserve_samples(4);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	al_play_sample(ambiente_dificil, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
 	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_hard()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
@@ -1959,7 +1913,6 @@ int jugarhard()
 		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
 		mover_personaje_hard();											//Activamos la funcion del movimiento del Personaje
 
-		
 		dibujar_zombie();												//Activamos la funcion que dibuja al Zombie
 		dibujar_esqueleto();											//Activamos la funcion que dibuja al Esqueleto
 		dibujar_creeper();												//Activamos la funcion que dibuja al Creeper
@@ -1978,6 +1931,6 @@ int jugarhard()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente); 
+	al_destroy_sample(ambiente_dificil); 
 	return 1;
 }
