@@ -1,7 +1,7 @@
 <p align="center"><img src="PacCraft5/info/paccraft.png" alt="paccraft" height="120px"></p>
 
 <p align="center"> 
-  <b>Visits/b>
+  <b>Visits</b>
   <br>
   <img src="https://profile-counter.glitch.me/marioalf2002/count.svg" />
 </p>
