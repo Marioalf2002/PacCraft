@@ -22,6 +22,11 @@ Se cuanta con dos diferentes opciones siendo la primera la de <b>Inicio</b>, est
 Contamos con 4 mapas diferentes <b>Fácil</b>, <b>Medio</b>, <b>Difícultoso</b> y <b>Hard</b>, cada mapa cuenta con música ambiente, enemigos diferentes y texturas diferentes.
 <p align="center"><img src="PacCraft5/menu/modo.png"></p>
 
+# Misterio o Easter egg
+Ten <b>Cuidado</b> no se sabe <b>Cuándo</b> y no se sabe <b>Cómo</b> pero te puede visitar un <b>Fantasma</b> y matarte... Puede volverse algo <b>Estresante</b>
+
+A veces pasan cosas <b>Extrañas</b>... Como Enemigos escalando muros..
+
 # Mapa Fácil
 <b>Comida:</b> Diamantes.
 
