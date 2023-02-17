@@ -78,8 +78,14 @@ En el Mapa Hard contamos con <b>Todos los Enemigos</b> de los anteriores mapas, 
 <p align="center"><img src="PacCraft5/info/herobrine.png"></p>
 <br>
 
-# Nota Importante
+# Configuración Allegro 5
+Para los que gusten probar el juego o experimentar en él, las siguientes <b>Configuraciones</b> de Allegro son <b>Necesarias</b> para el correcto funcionamiento del juego.
 
+<br>
+<p align="center"><img src="PacCraft5/config/Allegro.png"></p>
+<br>
+
+# Nota Importante
 El Proyecto del juego fue creado en <b>Visual Studio 2022</b>, en caso de querer usarlo o modificarlo a gusto, se le recomienda trabajarlo sobre Visual Studio 2022 <b>previniendo</b> así problemas de <b>compatibilidad</b>.
 <br>
 <br>

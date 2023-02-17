@@ -57,7 +57,7 @@ ALLEGRO_BITMAP* modos;												//Variable que contiene imagen Menu Dificultad
 ALLEGRO_BITMAP* modo_facil;											//Variable que contiene imagen Menu Dificultades Facil
 ALLEGRO_BITMAP* modo_medio;											//Variable que contiene imagen Menu Dificultades Medio
 ALLEGRO_BITMAP* modo_dificil;										//Variable que contiene imagen Menu Dificultades Dificil
-ALLEGRO_BITMAP* modo_hard;										//Variable que contiene imagen Menu Dificultades Hard
+ALLEGRO_BITMAP* modo_hard;											//Variable que contiene imagen Menu Dificultades Hard
 
 ALLEGRO_EVENT_QUEUE* event_queue;									//Variable para contener eventos
 ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
@@ -65,7 +65,7 @@ ALLEGRO_EVENT_QUEUE* event_queue_teclado;							//Variable para contener eventos
 ALLEGRO_BITMAP* roca;												//Variable que contiene Textura Roca
 ALLEGRO_BITMAP* netherrack;											//Variable que contiene Textura Netherrack
 ALLEGRO_BITMAP* endstone;											//Variable que contiene Textura End Stone
-ALLEGRO_BITMAP* fin;											//Variable que contiene Textura Fin
+ALLEGRO_BITMAP* fin;												//Variable que contiene Textura Fin
 
 ALLEGRO_BITMAP* diamante;											//Variable que contiene Textura Diamante
 ALLEGRO_BITMAP* netherite;											//Variable que contiene Textura Netherite
@@ -306,11 +306,11 @@ int main()
 	int botones[] = { 0 };
 
 	//CREAMOS VARIABLES DE SONIDO MENU
-	ALLEGRO_SAMPLE* menu = al_load_sample("sound/musica.wav");
-	al_reserve_samples(1);
+	//ALLEGRO_SAMPLE* menu = al_load_sample("sound/musica.wav");
+	//al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE MENU
-	al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	//al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL PROGRAMA ACTIVO "MENU"
 	while (!GetAsyncKeyState(VK_ESCAPE))							//Para cerrar el Programa se espera la señal de tecla "ESC"
@@ -347,7 +347,7 @@ int main()
 				if (Evento.mouse.button & 1)
 				{
 					//LIBERAMOS MEMORIA DE SONIDO
-					al_destroy_sample(menu);
+					//al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
 					dificultad();
@@ -390,11 +390,11 @@ int dificultad()
 	int botones[] = { 0 };
 
 	//CREAMOS VARIABLES DE SONIDO MENU
-	ALLEGRO_SAMPLE* menu = al_load_sample("sound/musicad.wav");
-	al_reserve_samples(1);
+	//ALLEGRO_SAMPLE* menu = al_load_sample("sound/musicad.wav");
+	//al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE MENU
-	al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	//al_play_sample(menu, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL PROGRAMA ACTIVO "MENU"
 	while (!GetAsyncKeyState(VK_ESCAPE))							//Para cerrar el Programa se espera la señal de tecla "ESC"
@@ -438,7 +438,7 @@ int dificultad()
 				if (Evento.mouse.button & 1)
 				{
 					//LIBERAMOS MEMORIA DE SONIDO
-					al_destroy_sample(menu);
+					//al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
 					jugarfacil();
@@ -453,7 +453,7 @@ int dificultad()
 				if (Evento.mouse.button & 1)
 				{
 					//LIBERAMOS MEMORIA DE SONIDO
-					al_destroy_sample(menu);
+					//al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
 					jugarmedio();
@@ -467,7 +467,7 @@ int dificultad()
 				if (Evento.mouse.button & 1)
 				{
 					//LIBERAMOS MEMORIA DE SONIDO
-					al_destroy_sample(menu);
+					//al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
 					jugardificil();
@@ -481,7 +481,7 @@ int dificultad()
 				if (Evento.mouse.button & 1)
 				{
 					//LIBERAMOS MEMORIA DE SONIDO
-					al_destroy_sample(menu);
+					//al_destroy_sample(menu);
 
 					//EJECUTAMOS FUNCION QUE CONTIENE EL JUEGO
 					jugarhard();
@@ -507,8 +507,8 @@ int dificultad()
 void mapa_facil() {
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
-	al_reserve_samples(20);
+	//ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	//al_reserve_samples(20);
 
 	//FONDO DE JUEGO
 	al_draw_bitmap(cueva, 0, 0, 0);
@@ -530,7 +530,7 @@ void mapa_facil() {
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					//al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					facil[row][col] = 'N';
@@ -545,8 +545,8 @@ void mapa_facil() {
 void mapa_medio() {
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
-	al_reserve_samples(20);
+	//ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	//al_reserve_samples(20);
 
 	//FONDO DE JUEGO
 	al_draw_bitmap(nether, 0, 0, 0);
@@ -568,7 +568,7 @@ void mapa_medio() {
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					//al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					medio[row][col] = 'N';
@@ -583,8 +583,8 @@ void mapa_medio() {
 void mapa_dificil() {
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
-	al_reserve_samples(20);
+	//ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	//al_reserve_samples(20);
 
 	//FONDO DE JUEGO
 	al_draw_bitmap(endcity, 0, 0, 0);
@@ -606,7 +606,7 @@ void mapa_dificil() {
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					//al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					dificil[row][col] = 'N';
@@ -621,8 +621,8 @@ void mapa_dificil() {
 void mapa_hard() {
 
 	//CREAMOS VARIABLES DE SONIDO COMIDA
-	ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
-	al_reserve_samples(20);
+	//ALLEGRO_SAMPLE* comida = al_load_sample("sound/coin.wav");
+	//al_reserve_samples(20);
 
 	//FONDO DE JUEGO
 	al_draw_bitmap(todos, 0, 0, 0);
@@ -644,7 +644,7 @@ void mapa_hard() {
 				if ((py / 30 == row) && (px / 30 == col))
 				{
 					//ACTIVAMOS MUSICA DE COMIDA
-					al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+					//al_play_sample(comida, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 					//CAMBIAMOS LAS COMIDAS "o" POR " " PARA SIMULAR COMERLAS
 					hard[row][col] = 'N';
@@ -1833,17 +1833,17 @@ bool game_over_hard()
 int jugarfacil()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
-	al_reserve_samples(1);
-	
+	//ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/ambiente.wav");
+	//al_reserve_samples(1);
+
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
-	
+	//al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ( (!GetAsyncKeyState(VK_ESCAPE)) && (game_over_facil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
-	{		
-		al_clear_to_color(al_map_rgb(0, 0, 0));		
-		
+	while (game_over_facil())		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	{
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+
 		mapa_facil();													//Activamos la funcion que dibuja el Mapa
 
 		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
@@ -1857,36 +1857,36 @@ int jugarfacil()
 		movimiento_esqueleto_facil();									//Activamos movimiento enemigo
 		movimiento_creeper_facil();										//Activamos movimiento enemigo
 		movimiento_araña_facil();										//Activamos movimiento enemigo
-		
+
 		choque_facil();													//Activamos funcion para coque entre enemigo y personaje
 
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	//al_destroy_sample(ambiente);
 	return 1;
 }
 
 int jugarmedio()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/nether.wav");
-	al_reserve_samples(1);
+	//ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/nether.wav");
+	//al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	//al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_medio()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	while (game_over_medio())		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_medio();													//Activamos la funcion que dibuja el Mapa
-		
+
 		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
 		mover_personaje_medio();										//Activamos la funcion del movimiento del Personaje
-		
+
 		dibujar_whither();												//Activamos la funcion que dibuja al Whither
 		dibujar_piglin();												//Activamos la funcion que dibuja al Piglin
 		dibujar_zombiepiglin();											//Activamos la funcion que dibuja al Zombie Piglin
@@ -1902,55 +1902,55 @@ int jugarmedio()
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	//al_destroy_sample(ambiente);
 	return 1;
 }
 
 int jugardificil()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/end.wav");
-	al_reserve_samples(1);
+	//ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/end.wav");
+	//al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	//al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_dificil()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	while (game_over_dificil())		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 		mapa_dificil();													//Activamos la funcion que dibuja el Mapa
-		
+
 		dibujar_steve();												//Activamos la funciones que dibuja al Personaje
 		mover_personaje_dificil();										//Activamos la funcion del movimiento del Personaje
-		
+
 		dibujar_enderman();												//Activamos la funcion que dibuja al Enderman
 		dibujar_dragon();												//Activamos la funcion que dibuja al Dragon
 		movimiento_enderman_dificil();									//Activamos movimiento enemigo
 		movimiento_dragon_dificil();									//Activamos movimiento enemigo
-		
+
 		choque_dificil();												//Activamos funcion para coque entre enemigo y personaje
 
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente);
+	//al_destroy_sample(ambiente);
 	return 1;
 }
 
 int jugarhard()
 {
 	//CREAMOS VARIABLES DE SONIDO AMBIENTE
-	ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/hard.wav");
-	al_reserve_samples(1);
+	//ALLEGRO_SAMPLE* ambiente = al_load_sample("sound/hard.wav");
+	//al_reserve_samples(1);
 
 	//ACTIVAMOS MUSICA DE AMBIENTE
-	al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+	//al_play_sample(ambiente, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
 
 	//CICLO QUE TENDRA EL JUEGO ACTIVO
-	while ((!GetAsyncKeyState(VK_ESCAPE)) && (game_over_hard()))		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
+	while (game_over_hard())		//Para cerrar el Programa se espera la señal de tecla "ESC" o que se termine de comer los alimentos
 	{
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 
@@ -1959,7 +1959,7 @@ int jugarhard()
 		dibujar_steve();												//Activamos la funcion que dibuja al Personaje
 		mover_personaje_hard();											//Activamos la funcion del movimiento del Personaje
 
-		
+
 		dibujar_zombie();												//Activamos la funcion que dibuja al Zombie
 		dibujar_esqueleto();											//Activamos la funcion que dibuja al Esqueleto
 		dibujar_creeper();												//Activamos la funcion que dibuja al Creeper
@@ -1971,13 +1971,13 @@ int jugarhard()
 		dibujar_enderman_hard();										//Activamos la funcion que dibuja al Enderman
 		dibujar_herobrine();											//Activamos la funcion que dibuja a Herobrine
 		movimiento_enemigos_hard();										//Activamos movimiento enemigo
-		
+
 		choque_hard();													//Activamos funcion para coque entre enemigo y personaje
-		
+
 		al_flip_display();
 	}
 
 	//LIBERAMOS MEMORIA DE SONIDO
-	al_destroy_sample(ambiente); 
+	//al_destroy_sample(ambiente);
 	return 1;
 }
